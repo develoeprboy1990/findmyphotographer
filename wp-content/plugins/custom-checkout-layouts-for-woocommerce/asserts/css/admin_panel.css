@@ -1,0 +1,54 @@
+.menu_pro_feature ul{
+    list-style: square;
+    padding: 10px;
+}
+#cclw_custom_checkout .cmb2-wrap.form-table {
+    width: 70%;
+    float: left;
+	padding-right: 10px;
+    box-sizing: border-box;
+}
+#cclw_custom_checkout .cclw_admin_pro_panel {
+    width: 30%;
+    box-sizing: border-box;
+    float: left;
+	border: 1px solid #000000;
+	height: 445px;
+	position: relative;
+}
+.cclw_admin_pro_panel h2 {
+    background: #9b16d7;
+    color: #ffffff;
+    font-size: 20px;
+    text-transform: uppercase;
+	text-align: center;
+    margin: 0px;
+    padding: 20px;
+}
+.cclw_pro_panel_links {
+      width: -webkit-fill-available;
+    position: absolute;
+    bottom: 0px;
+    background: #9b16d7;
+    padding: 23px 0px;
+    text-align: center;
+}
+.cclw_pro_panel_links a {
+    background: #fefcff;
+    color: #9b16d7;
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: capitalize;
+    text-decoration: none;
+    margin: 0px 5px;
+    border-radius: 3px;
+    padding: 8px;
+}
+ul.cclw_features {
+    padding-left: 30px;
+    list-style: square;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: ui-serif;
+    line-height: 1.5em;
+}

@@ -1,0 +1,212 @@
+[04-Apr-2023 15:05:11 UTC] PHP Fatal error:  Cannot redeclare generate_premium_listings_form() (previously declared in /home/qualfiwk/findmyphotographer.ca/wp-content/themes/hello-elementor/functions.php:262) in /home/qualfiwk/findmyphotographer.ca/wp-content/themes/hello-elementor/veio-functions/add-1-year.php on line 3
+[04-Apr-2023 15:05:21 UTC] PHP Fatal error:  Cannot redeclare generate_premium_listings_form() (previously declared in /home/qualfiwk/findmyphotographer.ca/wp-content/themes/hello-elementor/functions.php:262) in /home/qualfiwk/findmyphotographer.ca/wp-content/themes/hello-elementor/veio-functions/add-1-year.php on line 3
+[04-Apr-2023 15:07:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wp_handle_upload() in /home/qualfiwk/findmyphotographer.ca/wp-content/themes/hello-elementor/functions.php:625
+Stack trace:
+#0 /home/qualfiwk/findmyphotographer.ca/wp-includes/class-wp-hook.php(308): process_premium_listings_form('')
+#1 /home/qualfiwk/findmyphotographer.ca/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters(NULL, Array)
+#2 /home/qualfiwk/findmyphotographer.ca/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /home/qualfiwk/findmyphotographer.ca/wp-settings.php(623): do_action('init')
+#4 /home/qualfiwk/findmyphotographer.ca/wp-config.php(106): require_once('/home/qualfiwk/...')
+#5 /home/qualfiwk/findmyphotographer.ca/wp-load.php(50): require_once('/home/qualfiwk/...')
+#6 /home/qualfiwk/findmyphotographer.ca/wp-blog-header.php(13): require_once('/home/qualfiwk/...')
+#7 /home/qualfiwk/findmyphotographer.ca/index.php(17): require('/home/qualfiwk/...')
+#8 {main}
+  thrown in /home/qualfiwk/findmyphotographer.ca/wp-content/themes/hello-elementor/functions.php on line 625
+[04-Apr-2023 15:09:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wp_handle_upload() in /home/qualfiwk/findmyphotographer.ca/wp-content/themes/hello-elementor/functions.php:625
+Stack trace:
+#0 /home/qualfiwk/findmyphotographer.ca/wp-includes/class-wp-hook.php(308): process_premium_listings_form('')
+#1 /home/qualfiwk/findmyphotographer.ca/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters(NULL, Array)
+#2 /home/qualfiwk/findmyphotographer.ca/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /home/qualfiwk/findmyphotographer.ca/wp-settings.php(623): do_action('init')
+#4 /home/qualfiwk/findmyphotographer.ca/wp-config.php(106): require_once('/home/qualfiwk/...')
+#5 /home/qualfiwk/findmyphotographer.ca/wp-load.php(50): require_once('/home/qualfiwk/...')
+#6 /home/qualfiwk/findmyphotographer.ca/wp-blog-header.php(13): require_once('/home/qualfiwk/...')
+#7 /home/qualfiwk/findmyphotographer.ca/index.php(17): require('/home/qualfiwk/...')
+#8 {main}
+  thrown in /home/qualfiwk/findmyphotographer.ca/wp-content/themes/hello-elementor/functions.php on line 625
+[06-Jun-2023 16:33:40 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function display_taxonomy_term_with_children() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php:87
+Stack trace:
+#0 /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php(153): display_taxonomy_term_with_children_admin(Object(WP_Term))
+#1 /home/qualfiwk/findmyphotographer.ca/wp-includes/shortcodes.php(355): my_custom_shortcode_callback('', '', 'ZTS_SEARCH')
+#2 [internal function]: do_shortcode_tag(Array)
+#3 /home/qualfiwk/findmyphotographer.ca/wp-includes/shortcodes.php(227): preg_replace_callback('/\\[(\\[?)(ZTS_SE...', 'do_shortcode_ta...', '[ZTS_SEARCH]\n')
+#4 /home/qualfiwk/findmyphotographer.ca/wp-includes/class-wp-hook.php(308): do_shortcode('[ZTS_SEARCH]\n')
+#5 /home/qualfiwk/findmyphotographer.ca/wp-includes/plugin.php(205): WP_Hook->apply_filters('[ZTS_SEARCH]\n', Array)
+#6 /home/qualfiwk/findmyphotographer.ca/wp-includes/post-template.php(255): apply_filters('the_content', '[ZTS_SEARCH]')
+#7 /home in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php on line 87
+[06-Jun-2023 16:33:50 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function display_taxonomy_term_with_children() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php:87
+Stack trace:
+#0 /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php(153): display_taxonomy_term_with_children_admin(Object(WP_Term))
+#1 /home/qualfiwk/findmyphotographer.ca/wp-includes/shortcodes.php(355): my_custom_shortcode_callback('', '', 'ZTS_SEARCH')
+#2 [internal function]: do_shortcode_tag(Array)
+#3 /home/qualfiwk/findmyphotographer.ca/wp-includes/shortcodes.php(227): preg_replace_callback('/\\[(\\[?)(ZTS_SE...', 'do_shortcode_ta...', '[ZTS_SEARCH]\n')
+#4 /home/qualfiwk/findmyphotographer.ca/wp-includes/class-wp-hook.php(308): do_shortcode('[ZTS_SEARCH]\n')
+#5 /home/qualfiwk/findmyphotographer.ca/wp-includes/plugin.php(205): WP_Hook->apply_filters('[ZTS_SEARCH]\n', Array)
+#6 /home/qualfiwk/findmyphotographer.ca/wp-includes/post-template.php(255): apply_filters('the_content', '[ZTS_SEARCH]')
+#7 /home in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php on line 87
+[06-Jun-2023 16:35:37 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function display_taxonomy_term_with_children() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php:87
+Stack trace:
+#0 /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php(153): display_taxonomy_term_with_children_admin(Object(WP_Term))
+#1 /home/qualfiwk/findmyphotographer.ca/wp-includes/shortcodes.php(355): my_custom_shortcode_callback('', '', 'ZTS_SEARCH')
+#2 [internal function]: do_shortcode_tag(Array)
+#3 /home/qualfiwk/findmyphotographer.ca/wp-includes/shortcodes.php(227): preg_replace_callback('/\\[(\\[?)(ZTS_SE...', 'do_shortcode_ta...', '[ZTS_SEARCH]\n')
+#4 /home/qualfiwk/findmyphotographer.ca/wp-includes/class-wp-hook.php(308): do_shortcode('[ZTS_SEARCH]\n')
+#5 /home/qualfiwk/findmyphotographer.ca/wp-includes/plugin.php(205): WP_Hook->apply_filters('[ZTS_SEARCH]\n', Array)
+#6 /home/qualfiwk/findmyphotographer.ca/wp-includes/post-template.php(255): apply_filters('the_content', '[ZTS_SEARCH]')
+#7 /home in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php on line 87
+[06-Jun-2023 16:40:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function display_taxonomy_term_with_children() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php:87
+Stack trace:
+#0 /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php(153): display_taxonomy_term_with_children_admin(Object(WP_Term))
+#1 /home/qualfiwk/findmyphotographer.ca/wp-includes/shortcodes.php(355): my_custom_shortcode_callback('', '', 'ZTS_SEARCH')
+#2 [internal function]: do_shortcode_tag(Array)
+#3 /home/qualfiwk/findmyphotographer.ca/wp-includes/shortcodes.php(227): preg_replace_callback('/\\[(\\[?)(ZTS_SE...', 'do_shortcode_ta...', '[ZTS_SEARCH]\n')
+#4 /home/qualfiwk/findmyphotographer.ca/wp-includes/class-wp-hook.php(308): do_shortcode('[ZTS_SEARCH]\n')
+#5 /home/qualfiwk/findmyphotographer.ca/wp-includes/plugin.php(205): WP_Hook->apply_filters('[ZTS_SEARCH]\n', Array)
+#6 /home/qualfiwk/findmyphotographer.ca/wp-includes/post-template.php(255): apply_filters('the_content', '[ZTS_SEARCH]')
+#7 /home in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php on line 87
+[06-Jun-2023 16:45:57 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function display_taxonomy_term_with_children() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php:87
+Stack trace:
+#0 /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php(153): display_taxonomy_term_with_children_admin(Object(WP_Term))
+#1 /home/qualfiwk/findmyphotographer.ca/wp-includes/shortcodes.php(355): my_custom_shortcode_callback('', '', 'ZTS_SEARCH')
+#2 [internal function]: do_shortcode_tag(Array)
+#3 /home/qualfiwk/findmyphotographer.ca/wp-includes/shortcodes.php(227): preg_replace_callback('/\\[(\\[?)(ZTS_SE...', 'do_shortcode_ta...', '[ZTS_SEARCH]\n')
+#4 /home/qualfiwk/findmyphotographer.ca/wp-includes/class-wp-hook.php(308): do_shortcode('[ZTS_SEARCH]\n')
+#5 /home/qualfiwk/findmyphotographer.ca/wp-includes/plugin.php(205): WP_Hook->apply_filters('[ZTS_SEARCH]\n', Array)
+#6 /home/qualfiwk/findmyphotographer.ca/wp-includes/post-template.php(255): apply_filters('the_content', '[ZTS_SEARCH]')
+#7 /home in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php on line 87
+[06-Jun-2023 16:46:40 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function display_taxonomy_term_with_children() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php:87
+Stack trace:
+#0 /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php(153): display_taxonomy_term_with_children_admin(Object(WP_Term))
+#1 /home/qualfiwk/findmyphotographer.ca/wp-includes/shortcodes.php(355): my_custom_shortcode_callback('', '', 'ZTS_SEARCH')
+#2 [internal function]: do_shortcode_tag(Array)
+#3 /home/qualfiwk/findmyphotographer.ca/wp-includes/shortcodes.php(227): preg_replace_callback('/\\[(\\[?)(ZTS_SE...', 'do_shortcode_ta...', '[ZTS_SEARCH]\n')
+#4 /home/qualfiwk/findmyphotographer.ca/wp-includes/class-wp-hook.php(308): do_shortcode('[ZTS_SEARCH]\n')
+#5 /home/qualfiwk/findmyphotographer.ca/wp-includes/plugin.php(205): WP_Hook->apply_filters('[ZTS_SEARCH]\n', Array)
+#6 /home/qualfiwk/findmyphotographer.ca/wp-includes/post-template.php(255): apply_filters('the_content', '[ZTS_SEARCH]')
+#7 /home in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php on line 87
+[06-Jun-2023 16:47:18 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function display_taxonomy_term_with_children() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php:87
+Stack trace:
+#0 /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php(153): display_taxonomy_term_with_children_admin(Object(WP_Term))
+#1 /home/qualfiwk/findmyphotographer.ca/wp-includes/shortcodes.php(355): my_custom_shortcode_callback('', '', 'ZTS_SEARCH')
+#2 [internal function]: do_shortcode_tag(Array)
+#3 /home/qualfiwk/findmyphotographer.ca/wp-includes/shortcodes.php(227): preg_replace_callback('/\\[(\\[?)(ZTS_SE...', 'do_shortcode_ta...', '[ZTS_SEARCH]\n')
+#4 /home/qualfiwk/findmyphotographer.ca/wp-includes/class-wp-hook.php(308): do_shortcode('[ZTS_SEARCH]\n')
+#5 /home/qualfiwk/findmyphotographer.ca/wp-includes/plugin.php(205): WP_Hook->apply_filters('[ZTS_SEARCH]\n', Array)
+#6 /home/qualfiwk/findmyphotographer.ca/wp-includes/post-template.php(255): apply_filters('the_content', '[ZTS_SEARCH]')
+#7 /home in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php on line 87
+[06-Jun-2023 16:47:18 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function display_taxonomy_term_with_children() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php:87
+Stack trace:
+#0 /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php(153): display_taxonomy_term_with_children_admin(Object(WP_Term))
+#1 /home/qualfiwk/findmyphotographer.ca/wp-includes/shortcodes.php(355): my_custom_shortcode_callback('', '', 'ZTS_SEARCH')
+#2 [internal function]: do_shortcode_tag(Array)
+#3 /home/qualfiwk/findmyphotographer.ca/wp-includes/shortcodes.php(227): preg_replace_callback('/\\[(\\[?)(ZTS_SE...', 'do_shortcode_ta...', '[ZTS_SEARCH]\n')
+#4 /home/qualfiwk/findmyphotographer.ca/wp-includes/class-wp-hook.php(308): do_shortcode('[ZTS_SEARCH]\n')
+#5 /home/qualfiwk/findmyphotographer.ca/wp-includes/plugin.php(205): WP_Hook->apply_filters('[ZTS_SEARCH]\n', Array)
+#6 /home/qualfiwk/findmyphotographer.ca/wp-includes/post-template.php(255): apply_filters('the_content', '[ZTS_SEARCH]')
+#7 /home in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php on line 87
+[06-Jun-2023 16:47:18 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function display_taxonomy_term_with_children() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php:87
+Stack trace:
+#0 /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php(153): display_taxonomy_term_with_children_admin(Object(WP_Term))
+#1 /home/qualfiwk/findmyphotographer.ca/wp-includes/shortcodes.php(355): my_custom_shortcode_callback('', '', 'ZTS_SEARCH')
+#2 [internal function]: do_shortcode_tag(Array)
+#3 /home/qualfiwk/findmyphotographer.ca/wp-includes/shortcodes.php(227): preg_replace_callback('/\\[(\\[?)(ZTS_SE...', 'do_shortcode_ta...', '[ZTS_SEARCH]\n')
+#4 /home/qualfiwk/findmyphotographer.ca/wp-includes/class-wp-hook.php(308): do_shortcode('[ZTS_SEARCH]\n')
+#5 /home/qualfiwk/findmyphotographer.ca/wp-includes/plugin.php(205): WP_Hook->apply_filters('[ZTS_SEARCH]\n', Array)
+#6 /home/qualfiwk/findmyphotographer.ca/wp-includes/post-template.php(255): apply_filters('the_content', '[ZTS_SEARCH]')
+#7 /home in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php on line 87
+[06-Jun-2023 16:48:27 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function display_taxonomy_term_with_children() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php:87
+Stack trace:
+#0 /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php(153): display_taxonomy_term_with_children_admin(Object(WP_Term))
+#1 /home/qualfiwk/findmyphotographer.ca/wp-includes/shortcodes.php(355): my_custom_shortcode_callback('', '', 'ZTS_SEARCH')
+#2 [internal function]: do_shortcode_tag(Array)
+#3 /home/qualfiwk/findmyphotographer.ca/wp-includes/shortcodes.php(227): preg_replace_callback('/\\[(\\[?)(ZTS_SE...', 'do_shortcode_ta...', '[ZTS_SEARCH]\n')
+#4 /home/qualfiwk/findmyphotographer.ca/wp-includes/class-wp-hook.php(308): do_shortcode('[ZTS_SEARCH]\n')
+#5 /home/qualfiwk/findmyphotographer.ca/wp-includes/plugin.php(205): WP_Hook->apply_filters('[ZTS_SEARCH]\n', Array)
+#6 /home/qualfiwk/findmyphotographer.ca/wp-includes/post-template.php(255): apply_filters('the_content', '[ZTS_SEARCH]')
+#7 /home in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php on line 87
+[06-Jun-2023 16:51:33 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function display_taxonomy_term_with_children() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php:87
+Stack trace:
+#0 /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php(153): display_taxonomy_term_with_children_admin(Object(WP_Term))
+#1 /home/qualfiwk/findmyphotographer.ca/wp-includes/shortcodes.php(355): my_custom_shortcode_callback('', '', 'ZTS_SEARCH')
+#2 [internal function]: do_shortcode_tag(Array)
+#3 /home/qualfiwk/findmyphotographer.ca/wp-includes/shortcodes.php(227): preg_replace_callback('/\\[(\\[?)(ZTS_SE...', 'do_shortcode_ta...', '[ZTS_SEARCH]\n')
+#4 /home/qualfiwk/findmyphotographer.ca/wp-includes/class-wp-hook.php(308): do_shortcode('[ZTS_SEARCH]\n')
+#5 /home/qualfiwk/findmyphotographer.ca/wp-includes/plugin.php(205): WP_Hook->apply_filters('[ZTS_SEARCH]\n', Array)
+#6 /home/qualfiwk/findmyphotographer.ca/wp-includes/post-template.php(255): apply_filters('the_content', '[ZTS_SEARCH]')
+#7 /home in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php on line 87
+[06-Jun-2023 16:55:48 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function display_taxonomy_term_with_children() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php:87
+Stack trace:
+#0 /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php(153): display_taxonomy_term_with_children_admin(Object(WP_Term))
+#1 /home/qualfiwk/findmyphotographer.ca/wp-includes/shortcodes.php(355): my_custom_shortcode_callback('', '', 'ZTS_SEARCH')
+#2 [internal function]: do_shortcode_tag(Array)
+#3 /home/qualfiwk/findmyphotographer.ca/wp-includes/shortcodes.php(227): preg_replace_callback('/\\[(\\[?)(ZTS_SE...', 'do_shortcode_ta...', '[ZTS_SEARCH]\n')
+#4 /home/qualfiwk/findmyphotographer.ca/wp-includes/class-wp-hook.php(308): do_shortcode('[ZTS_SEARCH]\n')
+#5 /home/qualfiwk/findmyphotographer.ca/wp-includes/plugin.php(205): WP_Hook->apply_filters('[ZTS_SEARCH]\n', Array)
+#6 /home/qualfiwk/findmyphotographer.ca/wp-includes/post-template.php(255): apply_filters('the_content', '[ZTS_SEARCH]')
+#7 /home in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/zts-photogra.php on line 87
+[07-Jun-2023 06:29:46 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wp_handle_upload() in /home/qualfiwk/findmyphotographer.ca/wp-content/themes/hello-elementor/functions.php:625
+Stack trace:
+#0 /home/qualfiwk/findmyphotographer.ca/wp-includes/class-wp-hook.php(308): process_premium_listings_form('')
+#1 /home/qualfiwk/findmyphotographer.ca/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters(NULL, Array)
+#2 /home/qualfiwk/findmyphotographer.ca/wp-includes/plugin.php(517): WP_Hook->do_action(Array)
+#3 /home/qualfiwk/findmyphotographer.ca/wp-settings.php(623): do_action('init')
+#4 /home/qualfiwk/findmyphotographer.ca/wp-config.php(106): require_once('/home/qualfiwk/...')
+#5 /home/qualfiwk/findmyphotographer.ca/wp-load.php(50): require_once('/home/qualfiwk/...')
+#6 /home/qualfiwk/findmyphotographer.ca/wp-blog-header.php(13): require_once('/home/qualfiwk/...')
+#7 /home/qualfiwk/findmyphotographer.ca/index.php(17): require('/home/qualfiwk/...')
+#8 {main}
+  thrown in /home/qualfiwk/findmyphotographer.ca/wp-content/themes/hello-elementor/functions.php on line 625
+[09-Jun-2023 17:10:29 UTC] PHP Parse error:  syntax error, unexpected ''<option value="">Select Locat' (T_CONSTANT_ENCAPSED_STRING) in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/inc/home-page.php on line 112
+[09-Jun-2023 18:28:03 UTC] The Automattic\WooCommerce\Admin\API\Options::get_options function is deprecated since version 3.1.
+[09-Jun-2023 18:28:03 UTC] The Automattic\WooCommerce\Admin\API\Options::get_options function is deprecated since version 3.1.
+[09-Jun-2023 18:28:32 UTC] The Automattic\WooCommerce\Admin\API\Options::get_options function is deprecated since version 3.1.
+[09-Jun-2023 18:28:32 UTC] The Automattic\WooCommerce\Admin\API\Options::get_options function is deprecated since version 3.1.
+[09-Jun-2023 18:28:37 UTC] The Automattic\WooCommerce\Admin\API\Options::get_options function is deprecated since version 3.1.
+[09-Jun-2023 18:28:37 UTC] The Automattic\WooCommerce\Admin\API\Options::get_options function is deprecated since version 3.1.
+[12-Jun-2023 17:05:13 UTC] The Automattic\WooCommerce\Admin\API\Options::get_options function is deprecated since version 3.1.
+[12-Jun-2023 17:05:13 UTC] The Automattic\WooCommerce\Admin\API\Options::get_options function is deprecated since version 3.1.
+[16-Jun-2023 15:39:45 UTC] The Automattic\WooCommerce\Admin\API\Options::get_options function is deprecated since version 3.1.
+[16-Jun-2023 15:39:45 UTC] The Automattic\WooCommerce\Admin\API\Options::get_options function is deprecated since version 3.1.
+[16-Jun-2023 15:39:46 UTC] The Automattic\WooCommerce\Admin\API\Options::get_options function is deprecated since version 3.1.
+[16-Jun-2023 15:39:46 UTC] The Automattic\WooCommerce\Admin\API\Options::get_options function is deprecated since version 3.1.
+[16-Jun-2023 15:46:24 UTC] The Automattic\WooCommerce\Admin\API\Options::get_options function is deprecated since version 3.1.
+[16-Jun-2023 15:46:24 UTC] The Automattic\WooCommerce\Admin\API\Options::get_options function is deprecated since version 3.1.
+[16-Jun-2023 15:46:39 UTC] The Automattic\WooCommerce\Admin\API\Options::get_options function is deprecated since version 3.1.
+[16-Jun-2023 15:46:39 UTC] The Automattic\WooCommerce\Admin\API\Options::get_options function is deprecated since version 3.1.
+[16-Jun-2023 15:46:43 UTC] The Automattic\WooCommerce\Admin\API\Options::get_options function is deprecated since version 3.1.
+[16-Jun-2023 15:46:43 UTC] The Automattic\WooCommerce\Admin\API\Options::get_options function is deprecated since version 3.1.
+[16-Jun-2023 15:53:13 UTC] The Automattic\WooCommerce\Admin\API\Options::get_options function is deprecated since version 3.1.
+[16-Jun-2023 15:53:13 UTC] The Automattic\WooCommerce\Admin\API\Options::get_options function is deprecated since version 3.1.
+[18-Jun-2023 19:19:06 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ';' or ',' in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/inc/listing.php on line 63
+[18-Jun-2023 19:19:20 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ';' or ',' in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/inc/listing.php on line 63
+[19-Jun-2023 03:39:46 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/inc/profile.php on line 104
+[19-Jun-2023 03:39:46 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/inc/profile.php on line 130
+[19-Jun-2023 03:39:46 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/inc/profile.php on line 197
+[19-Jun-2023 03:40:50 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/inc/profile.php on line 104
+[19-Jun-2023 03:40:50 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/inc/profile.php on line 130
+[19-Jun-2023 03:40:50 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/inc/profile.php on line 197
+[19-Jun-2023 04:36:22 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/inc/profile.php on line 104
+[19-Jun-2023 04:36:22 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/inc/profile.php on line 130
+[19-Jun-2023 04:36:22 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/inc/profile.php on line 197
+[19-Jun-2023 04:36:28 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/inc/profile.php on line 104
+[19-Jun-2023 04:36:28 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/inc/profile.php on line 130
+[19-Jun-2023 04:36:28 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/inc/profile.php on line 197
+[19-Jun-2023 04:52:19 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/inc/profile.php on line 197
+[19-Jun-2023 04:55:38 UTC] The Automattic\WooCommerce\Admin\API\Options::get_options function is deprecated since version 3.1.
+[19-Jun-2023 04:55:38 UTC] The Automattic\WooCommerce\Admin\API\Options::get_options function is deprecated since version 3.1.
+[19-Jun-2023 05:58:19 UTC] PHP Warning:  include(): Filename cannot be empty in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/woocommerce/includes/wc-template-functions.php on line 53
+[19-Jun-2023 05:58:19 UTC] PHP Warning:  include(): Failed opening '' for inclusion (include_path='.:/opt/alt/php74/usr/share/pear') in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/woocommerce/includes/wc-template-functions.php on line 53
+[19-Jun-2023 05:58:19 UTC] PHP Warning:  include(): Filename cannot be empty in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/woocommerce/includes/wc-template-functions.php on line 53
+[19-Jun-2023 05:58:19 UTC] PHP Warning:  include(): Failed opening '' for inclusion (include_path='.:/opt/alt/php74/usr/share/pear') in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/woocommerce/includes/wc-template-functions.php on line 53
+[19-Jun-2023 05:58:19 UTC] PHP Warning:  include(): Filename cannot be empty in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/woocommerce/includes/wc-template-functions.php on line 53
+[19-Jun-2023 05:58:19 UTC] PHP Warning:  include(): Failed opening '' for inclusion (include_path='.:/opt/alt/php74/usr/share/pear') in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/woocommerce/includes/wc-template-functions.php on line 53
+[19-Jun-2023 05:58:19 UTC] PHP Warning:  include(): Filename cannot be empty in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/woocommerce/includes/wc-template-functions.php on line 53
+[19-Jun-2023 05:58:19 UTC] PHP Warning:  include(): Failed opening '' for inclusion (include_path='.:/opt/alt/php74/usr/share/pear') in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/woocommerce/includes/wc-template-functions.php on line 53
+[19-Jun-2023 06:23:14 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/inc/profile.php on line 104
+[19-Jun-2023 06:23:14 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/inc/profile.php on line 130
+[19-Jun-2023 06:23:14 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/inc/profile.php on line 197
+[19-Jun-2023 06:51:24 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/inc/profile.php on line 104
+[19-Jun-2023 06:51:24 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/inc/profile.php on line 130
+[19-Jun-2023 06:51:24 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/inc/profile.php on line 197
+[19-Jun-2023 14:02:27 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/inc/profile.php on line 197
+[19-Jun-2023 15:31:24 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/qualfiwk/findmyphotographer.ca/wp-content/plugins/zts-photogra/inc/profile.php on line 197

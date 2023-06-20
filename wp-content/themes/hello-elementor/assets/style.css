@@ -1,0 +1,87 @@
+
+/* Style pentru containerul galeriei */
+.gallery-container {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Style pentru item-urile din galerie */
+  .gallery-item {
+    position: relative;
+  }
+  
+  .gallery-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  
+  /* Style pentru butonul de lightbox */
+  .gallery-item .lightbox-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-size: 14px;
+    line-height: 1;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+  }
+  
+  .gallery-item .lightbox-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  /* Style pentru overlay-ul lightbox-ului */
+  .lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+  }
+  
+  /* Style pentru containerul lightbox-ului */
+  .lightbox-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  
+  /* Style pentru imaginea din lightbox */
+  .lightbox-image {
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Style pentru butonul de închidere al lightbox-ului */
+  .lightbox-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  .lightbox-close:hover {
+    color: #ccc;
+  }
+  
+  /* Hide pentru overlay-ul și containerul lightbox-ului */
+  .lightbox-overlay,
+  .lightbox-container {
+    display: none;
+  }
+  
