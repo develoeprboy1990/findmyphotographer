@@ -909,6 +909,155 @@ function zts_admin_menu_callback( ) {
 
 
 function zts_subscription_user_callback(){
+$categories = get_terms(array(
+    'taxonomy' => 'product_cat',
+    'hide_empty' => false,
+    'exclude' => array(get_option('default_product_cat')),
+));
+
+echo "<pre>";
+foreach ($categories as $category) {
+    // Get the category image URL
+    $image_id = get_woocommerce_term_meta($category->term_id, 'thumbnail_id', true);
+    $image_url = wp_get_attachment_image_url($image_id, 'full');
+    
+    // Print category details
+    echo "Category Name: " . $category->name . "<br>";
+    echo "Category Slug: " . $category->slug . "<br>";
+    echo "Category Image URL: " . $image_url . "<br><br>";
+}
+echo "</pre>";
+
+
+exit;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    exit;
+
+
+
+    $user_id = 1;
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'zts_user_data';
+    $sql = $wpdb->prepare("SELECT * FROM $table_name WHERE user_id = %s", $user_id);
+    $row = $wpdb->get_row($sql, ARRAY_A);
+    $g_images = unserialize($row['gallery_images']);
+
+    // Store the image URLs in an array
+    $image_urls = array();
+    foreach ($g_images as $key => $value) {
+        $image_urls[] = get_the_guid($value);
+    }
+
+    if (isset($_POST['zts_edit_gallery'])) {
+        // Get the uploaded images
+        $uploadedImages = $_FILES['photos'];
+        $old = $_POST['old'];
+
+
+        foreach ($old as $index => $url) {
+            $isValid = isImageValid($url);
+            
+            if ($isValid) {
+                echo "Image at index $index is valid." . PHP_EOL;
+            } else {
+                echo "Image at index $index is NOT valid." . PHP_EOL;
+            }
+        }
+        echo "<pre>";
+        print_r($uploadedImages);
+        echo 'These are old';
+        print_r($old);
+        echo "</pre>";
+    }
+
+    function isImageValid($url) {
+        // Check if the URL is empty or not a string
+        if (empty($url) || !is_string($url)) {
+            return false;
+        }
+        
+        // Check if the URL starts with "http" or "https"
+        if (!preg_match('/^https?:\/\//', $url)) {
+            return false;
+        }
+        
+        // Use getimagesize() to verify the image
+        $imageInfo = @getimagesize($url);
+        
+        // Check if getimagesize() returned false or an empty array
+        if (!$imageInfo || empty($imageInfo)) {
+            return false;
+        }
+        
+        // Valid image URL
+        return true;
+    }
+
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gallery</title>
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link type="text/css" rel="stylesheet" href="http://localhost/gallery/image-uploader.min.css">
+</head>
+<body>
+    <form method="POST" name="form-example-2" id="form-example-2" enctype="multipart/form-data">
+        <div class="input-field">
+            <label class="active">Photos</label>
+            <div class="input-images-2" style="padding-top: .5rem;"></div>
+        </div>
+        <button name="zts_edit_gallery">Submit and display data</button>
+    </form>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://localhost/gallery/image-uploader.min.js"></script>
+    <script type="text/javascript">
+        let preloaded = [
+            <?php foreach ($image_urls as $url) { ?>
+                { id: '<?php echo $url; ?>', src: '<?php echo $url; ?>' },
+            <?php } ?>
+        ];
+        $('.input-images-2').imageUploader({
+            preloaded: preloaded,
+            maxFiles: 10,
+            imagesInputName: 'photos',
+            preloadedInputName: 'old'
+        });
+    </script>
+</body>
+</html>
+<?php
+exit;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     global $wpdb;
 

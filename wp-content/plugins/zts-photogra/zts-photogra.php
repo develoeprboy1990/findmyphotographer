@@ -49,12 +49,13 @@ function zts_custom_table()
         company_name VARCHAR(255),
         company_url VARCHAR(255),
         profile_image VARCHAR(255),
-        gallery_images TEXT, -- Modify data type to TEXT for larger data
-        phone_number VARCHAR(20), -- Add the phone_number column
+        gallery_images TEXT,
+        phone_number VARCHAR(20),
         categories TEXT,
         locations TEXT,
         priority INT(11) DEFAULT 0,
         status VARCHAR(20) DEFAULT 'active',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Add the created_at column with a default value of the current timestamp
         PRIMARY KEY (id)
     )";
 
