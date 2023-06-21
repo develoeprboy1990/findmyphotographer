@@ -148,6 +148,10 @@ $site_url = get_site_url();
 
     foreach ($results as $key => $value) {
 
+      if($value['status'] != 'active'){
+        continue;
+      }
+
       echo '<div class="cart_item">';
 
     $guid = get_the_guid($value['profile_image']);

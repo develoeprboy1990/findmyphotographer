@@ -549,7 +549,6 @@ function my_cat_block_callback(){
 
    
     <style type="text/css">
-
         .latest-categories .col-5 {
             flex: 0 0 auto;
             width: 20%;
@@ -566,10 +565,7 @@ function my_cat_block_callback(){
 
         .latest-categories
         .icon-box {
-         
             margin: 0;
-
-
         }
 
         .latest-categories .icon-box h4 {
@@ -595,9 +591,6 @@ function my_cat_block_callback(){
         }
 
         .latest-categories .icon-box h4 a:hover{color:#18655a}
-
-
-
 
         .latest-categories .listing-btn a i {
             padding: 0;
@@ -665,12 +658,137 @@ function my_feature_block_callback(){
     global $wpdb;
     $table_name = $wpdb->prefix . 'zts_user_data';
     // Retrieve all data from the table
-    $data = $wpdb->get_results("SELECT * FROM $table_name WHERE priority = 1 LIMIT 4");
+    $feature_products = $wpdb->get_results("SELECT * FROM $table_name WHERE priority = 1 LIMIT 4");
 
-    echo "<pre>";
-    print_r($data);
-    echo "</pre>";
-    exit;
+  
+
+    ?>
+    <style type="text/css">
+        .latest-listing .col-4 {
+    flex: 0 0 auto;
+    width: 25%;
+}
+
+.latest-listing > * {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+    margin-top: var(--bs-gutter-y);
+}
+
+.latest-listing
+.icon-box {
+    box-shadow: 0px 0px 10px 0px rgba(164.99999999999997, 164.99999999999997, 164.99999999999997, 0.5);
+    margin: 0;
+    padding: 20px 15px 10px 15px;
+    border-radius: 30px 30px 30px 30px;
+}
+
+.latest-listing .icon-box h4 {
+    font-family: "Poppins", Sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 7px;
+
+}
+
+.latest-listing .icon-box h4 a {
+    color: #0b1632;
+    transition: all .4s ease-in-out;
+-moz-transition: all .4s ease-in-out;
+-webkit-transition: all .4s ease-in-out;
+-o-transition: all .4s ease-in-out;
+}
+
+.latest-listing .icon-box h4 a:hover{color:#18655a}
+
+.latest-listing .listing-location .list-icon {
+vertical-align: middle
+}
+
+
+.latest-listing .listing-location .list-icon i {
+    color: #18655a;
+    font-size: 17px;
+}
+
+.latest-listing .listing-location {
+    font-family: "Poppins", Sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #000;
+    vertical-align: middle;
+    line-height: 1.2;
+}
+
+.latest-listing .listing-btn {
+    margin: 12px 0 17px;
+}
+
+.latest-listing  .listing-btn a {
+    padding: 7px 20px;
+    background: #18655a;
+    color: #fff;
+    font-family: poppins;
+    font-size: 14px;
+    border-radius: 100px;
+    line-height: normal;
+        transition: all .4s ease-in-out;
+-moz-transition: all .4s ease-in-out;
+-webkit-transition: all .4s ease-in-out;
+-o-transition: all .4s ease-in-out;
+}
+
+.latest-listing  .listing-btn a:hover {
+
+    background: #14234b;
+
+}
+
+    </style>
+    <div class="row latest-listing">
+
+        <?php
+        foreach ($feature_products as $key => $value) {
+            $get_profile = $value->profile_image;
+            $profile_img =  get_the_guid($get_profile);
+            $get_locations = unserialize($value->locations)
+            
+            ?>
+        <div class="col-4">
+            <div class="icon-box">
+                <div class="icon"> 
+                  <img src="<?php echo $profile_img; ?>" class=""> 
+                </div>
+                <h4><a href=""><?php echo $value->company_name; ?></a></h4>
+                <div class="listing-location">
+                  <span class="list-icon"><i aria-hidden="true" class="fas fa-map-marker-alt"></i></span>     
+                      <?php 
+                      $terms = [];
+                      foreach ($get_locations as $term_id) {
+                          $term = get_term_by('term_id', $term_id, 'location');
+                           if ($term) {
+                                $terms[] = $term->name;
+                            }
+                      }
+                      echo implode(', ', $terms);
+                       ?>                  
+                </div>
+                    <div class="listing-btn">
+                        <a target="blank" href="<?php echo get_site_url() . '/profile-page/?user_id=' .$value->user_id; ?>">View Listing</a>
+            </div>
+              </div>
+        </div>
+            <?php
+            
+        }
+        ?>
+        </div>
+    <?php
+
+
     
     $content = ob_get_clean();
     return $content;

@@ -420,8 +420,13 @@ function zts_login_shortcodes() {
 }
 add_shortcode( 'ZTS_LOGIN_USER', 'zts_login_shortcodes' );
 
+function zts_custom_login_redirect($redirect, $user) {
+    // Modify the redirect URL to the custom tab
+    $redirect = wc_get_account_endpoint_url('zts-tab');
+    return $redirect;
+}
 
-
+add_filter('woocommerce_login_redirect', 'zts_custom_login_redirect', 10, 2);
 
 
 require_once plugin_dir_path( __FILE__ ) . 'admin/admin-menu.php';
