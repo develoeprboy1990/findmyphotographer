@@ -290,8 +290,8 @@ class Packages_List_Table extends WP_List_Table
             case 'actions':
                 // Display action buttons for edit and delete
                 $actions = sprintf(
-                    '<a href="%s">Edit</a> | <a href="%s">Delete</a>',
-                    esc_url(add_query_arg(['action' => 'edit', 'id' => $item['id']], admin_url('admin.php?page=zts-subscription-actions'))),
+                    ' <a href="%s">Delete</a>',
+                    //esc_url(add_query_arg(['action' => 'edit', 'id' => $item['id']], admin_url('admin.php?page=zts-subscription-actions'))),
                     esc_url(add_query_arg(['action' => 'delete', 'id' => $item['id']], admin_url('admin.php?page=zts-subscription-actions')))
                 );
                 /*  $actions = sprintf('<a href="%s">Delete</a>',
