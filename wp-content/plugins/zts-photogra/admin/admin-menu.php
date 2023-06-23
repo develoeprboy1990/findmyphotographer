@@ -16,24 +16,16 @@ class Plan_Wp_List_Table
     public function __construct()
     {
         add_action('admin_menu', array($this, 'zts_admin_menu'));
+
+        add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
+        // Add the AJAX action hook
+        add_action('wp_ajax_feature_action_update', array($this, 'handle_feature_action_request'));
+
+        add_action('wp_ajax_status_update', array($this, 'handle_status_request'));
     }
 
     public function zts_admin_menu()
     {
-        /* add_menu_page(
-
-            'Business Settings',
-            'Business Settings',
-            'manage_options',
-            'zts-admin-menu',
-            array($this, 'zts_admin_menu_callback'),
-            'dashicons-rest-api',
-            20
-            
-        ); */
-
-     
-
         add_menu_page(
             'Listings', // Page title
             'Listings', // Menu title
@@ -41,19 +33,29 @@ class Plan_Wp_List_Table
             'zts-subscription-list', // Menu slug
             array($this, 'list_table_page'), // Callback function to display the submenu page content
             'dashicons-rest-api',
-            20
+            5
 
         );
 
         add_submenu_page(
-            'zts-subscription-list', // Parent slug (should match the parent menu page's slug)
-            'All Listing', // Page title
-            'All Listing', // Menu title
-            'manage_options', // Capability required
-            'zts-subscription-list', // Menu slug
-            array($this, 'list_table_page') // Callback function to display the submenu page content
+            'zts-subscription-list', // 1752 Parent slug (should match the parent menu page's slug)
+            'Free Listing', // Page title
+            'Free Listing', // Menu title
+            'manage_options', // Capability required 
+            'zts-subscription-free-list',
+            array($this, 'list_table_free_page') // Callback function to display the submenu page content
 
         );
+
+        add_submenu_page(
+            'zts-subscription-list', // 1752 Parent slug (should match the parent menu page's slug)
+            'Premium Listing', // Page title
+            'Premium Listing', // Menu title
+            'manage_options', // Capability required 
+            'zts-subscription-premium-list',
+            array($this, 'list_table_premium_page') // Callback function to display the submenu page content
+        );
+
         add_submenu_page(
             'zts-subscription-list', // Parent slug (should match the parent menu page's slug)
             'Settings', // Page title
@@ -63,39 +65,6 @@ class Plan_Wp_List_Table
             array($this, 'zts_admin_menu_callback') // Callback function to display the submenu page content
 
         );
-
-
-        // Add Submenu page
-        add_submenu_page(
-            'zts-subscription-list', // Parent slug (should match the parent menu page's slug)
-            'Subscription Users', // Page title
-            'Subscription Users', // Menu title
-            'manage_options', // Capability required
-            'zts-subscription-users', // Menu slug
-            array($this, 'zts_subscription_user_callback') // Callback function to display the submenu page content
-
-        );
- 
-        $menu_slug = 'zts-subscription-actions';
-        $query_string = 'listingType=1'; // Replace with your desired query string
-        $query_args = array(
-            'listingType' => '1',
-        );
-
-        $encoded_query = http_build_query($query_args);
-        $menu_url = admin_url('admin.php?page=' . $menu_slug . '&' . $encoded_query);
-
-        add_submenu_page(
-            'zts-admin-menu', // Parent slug (should match the parent menu page's slug)
-            'Free Listing', // Page title
-            'Free Listing', // Menu title
-            'manage_options', // Capability required
-            $menu_slug . '?' . $encoded_query, // Append the query string to the menu URL
-            array($this, 'list_table_page') // Callback function to display the submenu page content
-
-        );
-
-
         add_submenu_page(
             null, // Set the parent menu slug to null
             'Subscription Actions', // Page title
@@ -106,6 +75,112 @@ class Plan_Wp_List_Table
         );
     }
 
+
+
+
+
+    public function enqueue_admin_scripts()
+    {
+        // Enqueue jQuery for the admin panel
+        wp_enqueue_script('jquery');
+        // Add your custom jQuery code here
+        wp_add_inline_script('jquery', '
+    jQuery(document).ready(function($) {
+        // Your jQuery code goes here
+        $(document).on("change", ".features", function() {
+            var feature = $(this).val();
+            var id      = $(this).data("value");
+            var ajaxurl = "' . admin_url('admin-ajax.php') . '";
+            // AJAX request
+            $.ajax({
+                url: ajaxurl, // WordPress AJAX URL
+                type: "POST",
+                data: {
+                    action: "feature_action_update", // Custom AJAX action name
+                    id:id,
+                    feature: feature 
+                },
+                success: function(response) {
+                    // Handle the response from the server
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    // Handle any error that occurs during the AJAX request
+                    console.error(xhr.responseText);
+                }
+            });
+
+        });//AJAX REQUEST ENDS HERE
+
+
+        $(document).on("change", ".status_alert", function() { 
+            var status = $(this).val();
+            var id      = $(this).data("value");
+            var ajaxurl = "' . admin_url('admin-ajax.php') . '";
+            // AJAX request
+            $.ajax({
+                url: ajaxurl, // WordPress AJAX URL
+                type: "POST",
+                data: {
+                    action: "status_update", // Custom AJAX action name
+                    id:id,
+                    status: status 
+                },
+                success: function(response) {
+                    // Handle the response from the server
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    // Handle any error that occurs during the AJAX request
+                    console.error(xhr.responseText);
+                }
+            });
+
+        });//AJAX REQUEST ENDS HERE
+
+
+    });//document ready ends here
+');
+    }
+
+    public function handle_feature_action_request()
+    {
+
+        global $wpdb;
+        $where = ' ';
+        $table_name = $wpdb->prefix . 'zts_user_data';
+        $feature = 2;
+        if($_REQUEST['feature'] == 'yes'){
+            $feature = 1;
+        }
+        $id      = $_REQUEST['id'];
+        $wpdb->update($table_name, ['priority'=>$feature], array('id' => $id));
+        // Process the request and generate the response
+        $response = 'Response from the server: ';
+
+        // Send the response back to the JavaScript code
+        wp_send_json_success($response);
+    }
+
+
+
+    public function handle_status_request()
+    {
+
+        global $wpdb;
+        $where = ' ';
+        $table_name = $wpdb->prefix . 'zts_user_data';
+        $status   = $_REQUEST['status']; 
+        $id      = $_REQUEST['id'];
+        $wpdb->update($table_name, ['status'=>$status], array('id' => $id));
+        // Process the request and generate the response
+        $response = 'Response from the server: ';
+
+        // Send the response back to the JavaScript code
+        wp_send_json_success($response);
+    }
+
+
     /**
      * Display the list table page
      *
@@ -114,21 +189,53 @@ class Plan_Wp_List_Table
     public function list_table_page()
     {
         $exampleListTable = new Packages_List_Table();
-
         // If orderby is set, use this as the sort column
         $listingType = null;
-        if (!empty($_GET['listingType'])) {
-            $listingType = $_GET['listingType'];
-        }
 
         $exampleListTable->prepare_items($listingType);
 
 ?>
         <div class="wrap">
             <div id="icon-users" class="icon32"></div>
-            <h2> List Packages</h2>
+            <h2> All Listing</h2>
             <?php $exampleListTable->display(); ?>
         </div>
+    <?php
+    }
+
+
+    public function list_table_free_page()
+    {
+
+        $exampleListTable = new Packages_List_Table();
+        // If orderby is set, use this as the sort column
+        $listingType = '=1752';
+        $exampleListTable->prepare_free_items($listingType);
+    ?>
+        <div class="wrap">
+            <div id="icon-users" class="icon32"></div>
+            <h2> Free Listing</h2>
+            <?php $exampleListTable->display(); ?>
+        </div>
+    <?php
+    }
+
+
+    public function list_table_premium_page()
+    {
+
+        $exampleListTable = new Packages_List_Table();
+        // If orderby is set, use this as the sort column
+        $listingType = '<>1752';
+        $exampleListTable->prepare_items($listingType);
+    ?>
+        <div class="wrap">
+            <div id="icon-users" class="icon32"></div>
+            <h2> Premium Listing</h2>
+            <?php $exampleListTable->display(); ?>
+        </div>
+
+
     <?php
     }
 
@@ -188,6 +295,31 @@ class Packages_List_Table extends WP_List_Table
         $this->items           = $data;
     }
 
+
+    /**
+     * Prepare the items for the table to process
+     *
+     * @return Void
+     */
+    public function prepare_free_items($listingType = null)
+    {
+        $columns     = $this->get_free_columns();
+        $hidden      = $this->get_hidden_columns();
+        $sortable    = $this->get_sortable_columns();
+        $data        = $this->table_data($listingType);
+        usort($data, array(&$this, 'sort_data'));
+        $perPage     = 20;
+        $currentPage = $this->get_pagenum();
+        $totalItems  = count($data);
+        $this->set_pagination_args(array(
+            'total_items' => $totalItems,
+            'per_page'    => $perPage
+        ));
+        $data                  = array_slice($data, (($currentPage - 1) * $perPage), $perPage);
+        $this->_column_headers = array($columns, $hidden, $sortable);
+        $this->items           = $data;
+    }
+
     /**
      * Override the parent columns method. Defines the columns to use in your listing table
      *
@@ -197,13 +329,35 @@ class Packages_List_Table extends WP_List_Table
     {
         $columns = array(
             'id'            => 'ID',
-            'customer_plan' => 'Customer Plan',
+            'post_title' => 'Customer Plan',
             'company_name'  => 'Company Name',
             'company_url'   => 'Company Url',
             'phone_number'  => 'Phone Number',
-            'display_name'  => 'User',
-            'status'        => 'Status',
-            'actions'       => 'Actions'
+            'user_email'  => 'User',
+            'actions'       => 'Featured',
+            'status'        => 'Actions'
+        );
+
+        return $columns;
+    }
+
+
+
+    /**
+     * Override the parent columns method. Defines the columns to use in your listing table
+     *
+     * @return Array
+     */
+    public function get_free_columns()
+    {
+        $columns = array(
+            'id'            => 'ID',
+            'post_title' => 'Customer Plan',
+            'company_name'  => 'Company Name',
+            'company_url'   => 'Company Url',
+            'phone_number'  => 'Phone Number',
+            'user_email'  => 'User',
+            'status'        => 'Actions'
         );
 
         return $columns;
@@ -240,9 +394,10 @@ class Packages_List_Table extends WP_List_Table
         $where = ' ';
         $table_name = $wpdb->prefix . 'zts_user_data';
         $table_user = $wpdb->prefix . 'users';
-        $queryText  = "SELECT zu.*,u.display_name FROM $table_name zu LEFT JOIN $table_user u ON zu.user_id=u.ID";
+        $table_post = $wpdb->prefix . 'posts';
+        $queryText  = "SELECT zu.*,u.display_name,u.user_email,p.post_title FROM $table_name zu LEFT JOIN $table_user u ON zu.user_id=u.ID JOIN $table_post AS p ON p.ID=zu.customer_plan";
         if (!empty($listingType)) {
-            $where .= "WHERE customer_plan = '$listingType'";
+            $where .= "WHERE p.ID" . $listingType . "";
         }
         $queryText  .=  $where;
         $query      = $wpdb->prepare($queryText);
@@ -262,18 +417,51 @@ class Packages_List_Table extends WP_List_Table
     {
         switch ($column_name) {
             case 'id':
-            case 'customer_plan':
+            case 'post_title':
             case 'company_name':
             case 'company_url':
             case 'phone_number':
-            case 'display_name':
+            case 'user_email':
                 return $item[$column_name];
+            case 'actions':
+                // Display action buttons for edit and delete
+                /*   $actions = sprintf(
+                    ' <a href="%s">Delete</a>',
+                    //esc_url(add_query_arg(['action' => 'edit', 'id' => $item['id']], admin_url('admin.php?page=zts-subscription-actions'))),
+                    esc_url(add_query_arg(['action' => 'delete', 'id' => $item['id']], admin_url('admin.php?page=zts-subscription-actions')))
+                );
+                  $actions = sprintf('<a href="%s">Delete</a>',
+                    esc_url(add_query_arg(['action' => 'delete', 'id' => $item['id']], admin_url('admin.php?page=zts-subscription-actions')))
+                ); */
+
+                $types        = ['yes', 'no'];
+                $current_type = 'no';
+                if($item['priority'] == 1){
+                    $current_type = 'yes';
+                }
+                $dropdown       = sprintf(
+                    '<select name="status[%d]" class="features" data-value="'.$item['id'].'"><option value="">- Select -</option>',
+                    $item['id']
+                );
+                foreach ($types as $type) {
+                    $selected = ($current_type === $type) ? 'selected="selected"' : '';
+                    $dropdown .= sprintf(
+                        '<option value="%s" %s>%s</option>',
+                        esc_attr($type),
+                        $selected,
+                        ucfirst($type)
+                    );
+                }
+                $dropdown .= '</select>';
+                return $dropdown;
+
+
             case 'status';
                 // Display the status change dropdown
                 $statuses = ['active', 'pending', 'disabled'];
                 $current_status = $item['status'];
                 $dropdown = sprintf(
-                    '<select name="status[%d]"><option value="">- Select -</option>',
+                    '<select name="status[%d]" class="status_alert" data-value="'.$item['id'].'"><option value="">- Select -</option>',
                     $item['id']
                 );
                 foreach ($statuses as $status) {
@@ -282,23 +470,11 @@ class Packages_List_Table extends WP_List_Table
                         '<option value="%s" %s>%s</option>',
                         esc_attr($status),
                         $selected,
-                        $status
+                        ucfirst($status)
                     );
                 }
                 $dropdown .= '</select>';
                 return $dropdown;
-            case 'actions':
-                // Display action buttons for edit and delete
-                $actions = sprintf(
-                    ' <a href="%s">Delete</a>',
-                    //esc_url(add_query_arg(['action' => 'edit', 'id' => $item['id']], admin_url('admin.php?page=zts-subscription-actions'))),
-                    esc_url(add_query_arg(['action' => 'delete', 'id' => $item['id']], admin_url('admin.php?page=zts-subscription-actions')))
-                );
-                /*  $actions = sprintf('<a href="%s">Delete</a>',
-                    esc_url(add_query_arg(['action' => 'delete', 'id' => $item['id']], admin_url('admin.php?page=zts-subscription-actions')))
-                ); */
-                return $actions;
-
 
             default:
                 return print_r($item, true);
@@ -471,7 +647,6 @@ class Packages_List_Table extends WP_List_Table
         </script>
 
 <?php
-
         // Check if any rows were returned
         if ($wpdb->num_rows > 0) {
 
@@ -515,3 +690,4 @@ class Packages_List_Table extends WP_List_Table
         /* Shah ge enhasments */
     }
 }
+
