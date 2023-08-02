@@ -1,8 +1,44 @@
 jQuery(document).ready(function($){
 
+    $('input#account_email').on('keyup', function() {
+
+        // Get the entered value in the account password field
+
+        var customEmail = $(this).val();
+
+        console.log(customEmail);
+
     
 
+        // Set the value of the billing email field
 
+        $('#billing_email').val(customEmail);
+
+    
+
+    });
+
+
+
+
+
+
+
+  $('nav.woocommerce-MyAccount-navigation').css('display', 'block !important');
+
+  $('div.woocommerce-MyAccount-content').css('display', 'block');
+
+
+
+
+
+
+
+
+
+
+
+    
 
 
 
@@ -14,75 +50,39 @@ jQuery(document).ready(function($){
 
 
 
-
-
-
-
     // cookies set function.
 
-    const zts_setCookie = (key, value, expiry = 15) => {
-
-
+    const zts_setCookie = (key, value, expiry = 360) => {
 
         var expires = new Date();
 
-
-
         expires.setTime(expires.getTime() + (expiry * 60 * 1000)); // Convert expiry to milliseconds
-
-
 
         document.cookie = key + '=' + value + ';expires=' + expires.toUTCString() + '; path=/';
 
-
-
     }
-
-
-
-
 
 
 
     // cookies get function.
 
-
-
     const zts_getCookie = (key) => {
-
-
 
         var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
 
-
-
         return keyValue ? keyValue[2] : null;
-
-
 
     }
 
 
 
-
-
-
-
     // Remove Cookies. 
-
-
 
     const zts_eraseCookie = (key) => {
 
-
-
         var keyValue = zts_getCookie(key);
 
-
-
         zts_setCookie(key, keyValue, '-1');
-
-
 
     }
 
@@ -102,33 +102,27 @@ jQuery(document).ready(function($){
 
         var product_description   = $(this).attr('data-description');
 
-        var product_price          = $(this).attr('data-price');
+        var product_price         = $(this).attr('data-price');
 
-        var product_scope          = $(this).attr('data-scope');
+        var product_scope         = $(this).attr('data-scope');
 
+        var g_business            = $(this).attr('data-business');
 
+        var g_address             = $(this).attr('data-address');
 
-        var g_business        = $(this).attr('data-business');
+        var g_category            = $(this).attr('data-category');
 
-        var g_address         = $(this).attr('data-address');
+        var g_location            = $(this).attr('data-location');
 
-        var g_category        = $(this).attr('data-category');
+        var g_page                = $(this).attr('data-page');
 
-        var g_location        = $(this).attr('data-location');
+        var g_listing             = $(this).attr('data-listing');
 
-        var g_page            = $(this).attr('data-page');
-
-        var g_listing         = $(this).attr('data-listing');
-
-        var g_gallery         = $(this).attr('data-gallery');
+        var g_gallery             = $(this).attr('data-gallery');
 
         $('.zts_hidden_product_scope').val(product_scope);
 
         $('.zts_hidden_product_id').val(product_id);
-
-
-
-        
 
         // var product_duration      = $(this).attr('data-duration');
 
@@ -142,89 +136,63 @@ jQuery(document).ready(function($){
 
         // var product_save          = $(this).attr('data-save');
 
- 
-
         $('.b_selected_package').html(product_title);
 
-    
 
-        
 
         if (product_scope == 'free') {
 
+                 $('.r_email').show();
 
+            
+
+            $('.zts_email_address_cont').show();
+
+            $('.zts_password_cont').show();
 
             $('.zts_comp_province_cont').hide();
 
-
-
             $('.zts_comp_city_cont').hide();
-
-
 
             $('.zts_comp_profile_cont').hide();
 
-
-
             $('.zts_comp_gallery_cont').hide();
-
-            
 
             $('.zts_business_phone_cont').hide();
 
             // $(".zts_comp_categories_cont").hide();
 
-
-
             // $(".zts_comp_location_cont").hide();
-
-
 
             $('.zts_categories_select2').select2({
 
                    maximumSelectionLength: 3,
 
-
-
                 theme: "classic"
 
-
-
             });
-
-
-
-
 
 
 
             // for selet2 locations
 
-
-
-             $('.get_form_location_id').select2({
-
-
+            $('.get_form_location_id').select2({
 
                 maximumSelectionLength: 1,
 
-
-
                 theme: "classic"
-
-
 
             });
 
-
-
-
-
-
-
         }else{
 
+                 $('.r_email').hide();
 
+            
+
+            $('.zts_email_address_cont').hide();
+
+            $('.zts_password_cont').hide();
 
             $('.zts_comp_province_cont').show();
 
@@ -252,51 +220,29 @@ jQuery(document).ready(function($){
 
             $('.zts_business_phone_cont').show();
 
-                // for selet2 categories
 
 
+            // for selet2 categories
 
             $('.zts_categories_select2').select2({
 
-
-
                 theme: "classic"
 
-
-
             });
-
-
-
-
 
 
 
             // for selet2 locations
 
-
-
-             $('.get_form_location_id').select2({
-
-
+            $('.get_form_location_id').select2({
 
                 maximumSelectionLength: cat_limit,
 
-
-
                 theme: "classic"
-
-
 
             });
 
-
-
         }
-
-
-
-
 
 
 
@@ -312,10 +258,6 @@ jQuery(document).ready(function($){
 
 
 
- 
-
-
-
         if (product_scope == 'free') {
 
             $(".rv_page i").removeClass("far fa-check-circle").addClass("fas fa-times");
@@ -325,8 +267,6 @@ jQuery(document).ready(function($){
             $(".rv_gallery i").removeClass("far fa-check-circle").addClass("fas fa-times");
 
         }
-
-
 
 
 
@@ -344,7 +284,17 @@ jQuery(document).ready(function($){
 
         $('.rv_gallery span').html( g_gallery );
 
+    });
 
+
+
+    // update value in review section.
+
+    $('.zts_comp_name').on('blur', function() {
+
+        var companyName = $(this).val(); 
+
+        $('.last-price span').text(companyName);
 
     });
 
@@ -352,28 +302,9 @@ jQuery(document).ready(function($){
 
 
 
-
-
- 
-
-
-
-    // update value in review section.
-
-
-
-    $('.zts_comp_name').on('blur', function() {
-
-
-
-        var companyName = $(this).val(); 
-
-
-
-        $('.last-price span').text(companyName);
-
-
-
+    $('#account_email').on('blur', function() {
+        var r_email = $(this).val(); 
+        $('.r_email span').text(r_email);
     });
 
 
@@ -384,47 +315,19 @@ jQuery(document).ready(function($){
 
     $('.zts_comp_url').on('blur', function() {
 
-
-
         var companyName = $(this).val();
 
-
-
         $('.new-price span').text(companyName);
-
-
 
     });
 
 
 
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
     /// form submit
-
-
 
     $('.zts_form_submit').on('click', function(e) { 
 
-
-
         e.preventDefault();
-
-
 
             var product_id    = $('.zts_hidden_product_id').val();
 
@@ -434,155 +337,79 @@ jQuery(document).ready(function($){
 
             if (product_scope == 'free') {
 
+                var account_email     = $('#account_email').val();
 
+                var account_password  = $('#account_password').val();
 
-                var company_name = $('.zts_comp_name').val();
+                var company_name      = $('.zts_comp_name').val();
 
+                var company_url       = $('.zts_comp_url').val();
 
+                var categories        = $('#zts_only_categories').val();
 
-                var company_url  = $('.zts_comp_url').val();
+                var location_id       = $('.get_form_location_id').val();
 
-
-
-                var categories   = $('#zts_only_categories').val();
-
-
-
-                var location_id  = $('.get_form_location_id').val();
-
-
-
-                var form_data = {
-
-
-
-                    'product_id': product_id,
-
-
-
-                    'product_scope' : product_scope,
-
-
-
-                    'company_name': company_name,
-
-
-
-                    'company_url': company_url,
-
-
-
-                    'categories': categories,
-
-
-
-                    'location_id': location_id
-
-
-
-                };
-
-
-
-                zts_eraseCookie('zts_form_data');
-
-
-
-                zts_setCookie('zts_form_data', JSON.stringify(form_data));   
-
-
+ 
 
                 var getSiteAdminURL = zts_ajax_url.ajax_url;
 
-
-
                 var formData = new FormData();
-
-
 
                 formData.append('product_id', product_id);
 
+                formData.append('account_email', account_email);
 
+                formData.append('account_password', account_password);
+
+                formData.append('company_name', company_name);
+
+                formData.append('company_url', company_url);
+
+                formData.append('categories', categories);
+
+                formData.append('location_id', location_id);
 
                 formData.append('action', 'zts_process_form_data_free');
 
-
-
                 $.ajax({
-
-
 
                     type: "post",
 
-
-
                     url: getSiteAdminURL,
-
-
 
                     data: formData,
 
-
-
                     cache: false,
-
-
 
                     processData: false,
 
-
-
                     contentType: false,
-
-
 
                     beforeSend: function (data) {
 
-
-
                         $('body').css('background-image', 'url(' + getLoaderGif + ')');
-
-
 
                         $("body").css('background-repeat', 'no-repeat');
 
-
-
                         $('body').css('background-position', 'center');
-
-
 
                         $('body').css('background-attachment', 'fixed');
 
-
-
                         $('body *').css('opacity', '0.8');
-
-
 
                     },
 
-
-
                     success: function (response) {
 
+                    $("body").css('background-image', 'none');
 
+                    $('body *').css('opacity', '1');
 
-                        $("body").css('background-image', 'none');
-
-
-
-                        $('body *').css('opacity', '1');
-
-                             window.location.href = zts_ajax_url.zts_site_url + '/checkout';
+                           window.location.href = zts_ajax_url.zts_site_url + '/my-account';
 
                     }
 
-
-
                 });
-
-
 
             }else{
 
@@ -590,281 +417,117 @@ jQuery(document).ready(function($){
 
                     var company_name = $('.zts_comp_name').val();
 
-
-
                     var company_url  = $('.zts_comp_url').val();
-
-
 
                     var company_phone  = $('.zts_business_phone').val();
 
-
-
                     var categories   = $('#zts_only_categories').val();
-
-
 
                     var location_id  = $('.get_form_location_id').val();
 
-
-
                     var profileImage = $(".zts_profile_file-input").get(0).files[0];
-
-
 
                     var files        = $("#multiplefileupload").get(0).files;
 
-
-
                     var getSiteAdminURL = zts_ajax_url.ajax_url;
-
-
 
                     var formData = new FormData();
 
-
-
                     for (var i = 0; i < files.length; i++) {
-
-
 
                         formData.append('multiplefileupload[]', files[i]);
 
-
-
                     }
-
-
 
                     formData.append('product_id', product_id);
 
-
-
                     formData.append('profileImage', profileImage);
-
-
 
                     formData.append('action', 'zts_process_form_data');
 
-
-
                     $.ajax({
-
-
 
                         type: "post",
 
-
-
                         url: getSiteAdminURL,
-
-
 
                         data: formData,
 
-
-
                         cache: false,
-
-
 
                         processData: false,
 
-
-
                         contentType: false,
-
-
 
                         beforeSend: function (data) {
 
-
-
                             $('body').css('background-image', 'url(' + getLoaderGif + ')');
-
-
 
                             $("body").css('background-repeat', 'no-repeat');
 
-
-
                             $('body').css('background-position', 'center');
-
-
 
                             $('body').css('background-attachment', 'fixed');
 
-
-
                             $('body *').css('opacity', '0.8');
-
-
 
                         },
 
-
-
                         success: function (response) {
-
-
 
                         if (response.success) {
 
-
-
                             $("body").css('background-image', 'none');
-
-
 
                             $('body *').css('opacity', '1');
 
-
-
                             var data = response.data;
-
-
 
                             var gallery = data.multiplefileupload;
 
-
-
                             var profile_img = data.profileImage;
-
-
 
                             var form_data = {
 
-
-
                                 'product_id': product_id,
-
-
 
                                 'company_name': company_name,
 
-
-
                                 'product_scope' : product_scope,
-
-
 
                                 'company_phone' : company_phone,
 
-
-
                                 'company_url': company_url,
-
-
 
                                 'categories': categories,
 
-
-
                                 'location_id': location_id,
-
-
 
                                 'profile_img': profile_img,
 
-
-
                                 'gallery': gallery
-
-
 
                             };
 
-
-
                             zts_eraseCookie('zts_form_data');
 
-
-
                             zts_setCookie('zts_form_data', JSON.stringify(form_data));
-
-
 
                             window.location.href = zts_ajax_url.zts_site_url + '/checkout';
 
                         } 
 
-
-
                         }
-
-
 
                     });
 
-
-
                 }
-
-            
-
-         
 
     });
 
 
 
-    
-
-
-
-
-
-
-
     // For profile image in form.
-
-
-
-    // $('.zts_profile_file-input').change(function(event){
-
-
-
-    //     event.preventDefault();
-
-
-
-    //     var curElement = $('.image');
-
-
-
-    //     var reader = new FileReader();
-
-
-
-    //     reader.onload = function (e) {
-
-
-
-    //         // get loaded data and render thumbnail.
-
-
-
-    //         curElement.attr('src', e.target.result);
-
-
-
-    //     };
-
-
-
-    //     // read the image file as a data URL.
-
-
-
-    //     reader.readAsDataURL(this.files[0]);
-
-
-
-    // });
-
-
-
-    
 
     function zts_set_profile_img(input) {
 
@@ -888,17 +551,13 @@ jQuery(document).ready(function($){
 
     }
 
+
+
     $("#zts_file_upload").change(function() {
 
         zts_set_profile_img(this);
 
     });
-
- 
-
-
-
-
 
 
 

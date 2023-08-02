@@ -16,10 +16,6 @@ class Plan_Wp_List_Table
     public function __construct()
     {
         add_action('admin_menu', array($this, 'zts_admin_menu'));
-        add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
-        // Add the AJAX action hook
-        add_action('wp_ajax_feature_action_update', array($this, 'handle_feature_action_request'));
-        add_action('wp_ajax_status_update', array($this, 'handle_status_request'));
     }
 
     public function zts_admin_menu()
@@ -27,15 +23,15 @@ class Plan_Wp_List_Table
         add_menu_page(
             'Listings', // Page title
             'Listings', // Menu title
-            'do_not_allow', // Capability required
+            'manage_options', // Capability required
             'zts-subscription-list', // Menu slug
             array($this, 'list_table_page'), // Callback function to display the submenu page content
             'dashicons-rest-api',
             5
 
         );
-
-        add_submenu_page(
+         
+         add_submenu_page(
             'zts-subscription-list', // 1752 Parent slug (should match the parent menu page's slug)
             'Free Listing', // Page title
             'Free Listing', // Menu title
@@ -53,7 +49,7 @@ class Plan_Wp_List_Table
             'zts-subscription-premium-list',
             array($this, 'list_table_premium_page') // Callback function to display the submenu page content
         );
-
+        
         add_submenu_page(
             'zts-subscription-list', // Parent slug (should match the parent menu page's slug)
             'Settings', // Page title
@@ -62,7 +58,7 @@ class Plan_Wp_List_Table
             'zts-admin-men', // Menu slug
             array($this, 'zts_admin_menu_callback') // Callback function to display the submenu page content
 
-        );
+        ); 
         add_submenu_page(
             null, // Set the parent menu slug to null
             'Subscription Actions', // Page title
@@ -73,104 +69,6 @@ class Plan_Wp_List_Table
         );
     }
 
-    public function enqueue_admin_scripts()
-    {
-        // Enqueue jQuery for the admin panel
-        wp_enqueue_script('jquery');
-        // Add your custom jQuery code here
-        wp_add_inline_script('jquery', '
-    jQuery(document).ready(function($) {
-        // Your jQuery code goes here
-        $(document).on("change", ".features", function() {
-            var feature = $(this).val();
-            var id      = $(this).data("value");
-            var ajaxurl = "' . admin_url('admin-ajax.php') . '";
-            // AJAX request
-            $.ajax({
-                url: ajaxurl, // WordPress AJAX URL
-                type: "POST",
-                data: {
-                    action: "feature_action_update", // Custom AJAX action name
-                    id:id,
-                    feature: feature 
-                },
-                success: function(response) {
-                    // Handle the response from the server
-                    console.log(response);
-                },
-                error: function(xhr, status, error) {
-                    // Handle any error that occurs during the AJAX request
-                    console.error(xhr.responseText);
-                }
-            });
-
-        });//AJAX REQUEST ENDS HERE
-
-        $(document).on("change", ".status_alert", function() { 
-            var status = $(this).val();
-            var id      = $(this).data("value");
-            var ajaxurl = "' . admin_url('admin-ajax.php') . '";
-            // AJAX request
-            $.ajax({
-                url: ajaxurl, // WordPress AJAX URL
-                type: "POST",
-                data: {
-                    action: "status_update", // Custom AJAX action name
-                    id:id,
-                    status: status 
-                },
-                success: function(response) {
-                    // Handle the response from the server
-                    console.log(response);
-                },
-                error: function(xhr, status, error) {
-                    // Handle any error that occurs during the AJAX request
-                    console.error(xhr.responseText);
-                }
-            });
-        });//AJAX REQUEST ENDS HERE
-    });//document ready ends here
-');
-    }
-
-    public function handle_feature_action_request()
-    {
-
-        global $wpdb;
-        $where = ' ';
-        $table_name = $wpdb->prefix . 'zts_user_data';
-        $feature = 2;
-        if ($_REQUEST['feature'] == 'yes') {
-            $feature = 1;
-        }
-        $id      = $_REQUEST['id'];
-        $wpdb->update($table_name, ['priority' => $feature], array('id' => $id));
-        // Process the request and generate the response
-        $response = 'Response from the server: ';
-
-        // Send the response back to the JavaScript code
-        wp_send_json_success($response);
-    }
-
-
-
-    public function handle_status_request()
-    {
-
-        global $wpdb;
-        $where = ' ';
-        $table_name = $wpdb->prefix . 'zts_user_data';
-        $status   = $_REQUEST['status'];
-        $id      = $_REQUEST['id'];
-        $wpdb->update($table_name, ['status' => $status], array('id' => $id));
-        // Process the request and generate the response
-        $response = 'Response from the server: ';
-
-        // Send the response back to the JavaScript code
-        wp_send_json_success($response);
-    }
-
-
     /**
      * Display the list table page
      *
@@ -180,7 +78,7 @@ class Plan_Wp_List_Table
     {
         $exampleListTable = new Packages_List_Table();
         // If orderby is set, use this as the sort column
-        $listingType = null;
+        $listingType = null; 
 
         $exampleListTable->prepare_items($listingType);
 
@@ -224,8 +122,6 @@ class Plan_Wp_List_Table
             <h2> Premium Listing</h2>
             <?php $exampleListTable->display(); ?>
         </div>
-
-
     <?php
     }
 
@@ -286,7 +182,7 @@ class Packages_List_Table extends WP_List_Table
     }
 
 
-    /**
+     /**
      * Prepare the items for the table to process
      *
      * @return Void
@@ -319,11 +215,11 @@ class Packages_List_Table extends WP_List_Table
     {
         $columns = array(
             'id'            => 'ID',
-            'post_title'    => 'Customer Plan',
+            'post_title' => 'Customer Plan',
             'company_name'  => 'Company Name',
             'company_url'   => 'Company Url',
             'phone_number'  => 'Phone Number',
-            'user_email'    => 'User',
+            'user_email'  => 'User',
             'actions'       => 'Featured',
             'status'        => 'Actions'
         );
@@ -342,11 +238,11 @@ class Packages_List_Table extends WP_List_Table
     {
         $columns = array(
             'id'            => 'ID',
-            'post_title'    => 'Customer Plan',
+            'post_title' => 'Customer Plan',
             'company_name'  => 'Company Name',
             'company_url'   => 'Company Url',
             'phone_number'  => 'Phone Number',
-            'user_email'    => 'User',
+            'user_email'  => 'User',
             'status'        => 'Actions'
         );
 
@@ -385,11 +281,11 @@ class Packages_List_Table extends WP_List_Table
         $table_name = $wpdb->prefix . 'zts_user_data';
         $table_user = $wpdb->prefix . 'users';
         $table_post = $wpdb->prefix . 'posts';
-        $queryText  = "SELECT zu.*,u.display_name,u.user_email,p.post_title,p.post_content FROM $table_name zu LEFT JOIN $table_user u ON zu.user_id=u.ID JOIN $table_post AS p ON p.ID=zu.customer_plan";
+        $queryText  = "SELECT zu.*,u.display_name,u.user_email,p.post_title FROM $table_name zu LEFT JOIN $table_user u ON zu.user_id=u.ID JOIN $table_post AS p ON p.ID=zu.customer_plan";
         if (!empty($listingType)) {
-            $where .= "WHERE p.ID" . $listingType . "";
+            $where .= "WHERE p.ID".$listingType."";
         }
-        $queryText  .=  $where;
+        $queryText  .=  $where; 
         $query      = $wpdb->prepare($queryText);
         $results    =  $wpdb->get_results($query, ARRAY_A);
         return $results;
@@ -407,23 +303,15 @@ class Packages_List_Table extends WP_List_Table
     {
         switch ($column_name) {
             case 'id':
+            case 'post_title':
             case 'company_name':
             case 'company_url':
             case 'phone_number':
             case 'user_email':
                 return $item[$column_name];
-
-            case 'post_title':
-                // Combine first name and last name in the same column
-                $name = $item['post_title'];
-                if ($item['customer_plan'] != '1752') {
-                    $name = $item['post_title'] . ' - ' . strtoupper($item['post_content']);
-                }
-
-                return $name;
             case 'actions':
                 // Display action buttons for edit and delete
-                /*   $actions = sprintf(
+             /*   $actions = sprintf(
                     ' <a href="%s">Delete</a>',
                     //esc_url(add_query_arg(['action' => 'edit', 'id' => $item['id']], admin_url('admin.php?page=zts-subscription-actions'))),
                     esc_url(add_query_arg(['action' => 'delete', 'id' => $item['id']], admin_url('admin.php?page=zts-subscription-actions')))
@@ -432,13 +320,10 @@ class Packages_List_Table extends WP_List_Table
                     esc_url(add_query_arg(['action' => 'delete', 'id' => $item['id']], admin_url('admin.php?page=zts-subscription-actions')))
                 ); */
 
-                $types        = ['yes', 'no'];
+                $types = ['yes', 'no'];
                 $current_type = 'no';
-                if ($item['priority'] == 1) {
-                    $current_type = 'yes';
-                }
                 $dropdown       = sprintf(
-                    '<select name="status[%d]" class="features" data-value="' . $item['id'] . '"><option value="">- Select -</option>',
+                    '<select name="status[%d]"><option value="">- Select -</option>',
                     $item['id']
                 );
                 foreach ($types as $type) {
@@ -455,25 +340,25 @@ class Packages_List_Table extends WP_List_Table
 
 
             case 'status';
-                // Display the status change dropdown
-                $statuses = ['active', 'pending', 'disabled'];
-                $current_status = $item['status'];
-                $dropdown = sprintf(
-                    '<select name="status[%d]" class="status_alert" data-value="' . $item['id'] . '"><option value="">- Select -</option>',
-                    $item['id']
+            // Display the status change dropdown
+            $statuses = ['active', 'pending', 'disabled'];
+            $current_status = $item['status'];
+            $dropdown = sprintf(
+                '<select name="status[%d]"><option value="">- Select -</option>',
+                $item['id']
+            );
+            foreach ($statuses as $status) {
+                $selected = ($current_status === $status) ? 'selected="selected"' : '';
+                $dropdown .= sprintf(
+                    '<option value="%s" %s>%s</option>',
+                    esc_attr($status),
+                    $selected,
+                    ucfirst($status)
                 );
-                foreach ($statuses as $status) {
-                    $selected = ($current_status === $status) ? 'selected="selected"' : '';
-                    $dropdown .= sprintf(
-                        '<option value="%s" %s>%s</option>',
-                        esc_attr($status),
-                        $selected,
-                        ucfirst($status)
-                    );
-                }
-                $dropdown .= '</select>';
-                return $dropdown;
-
+            }
+            $dropdown .= '</select>';
+            return $dropdown;
+                
             default:
                 return print_r($item, true);
         }
@@ -645,6 +530,7 @@ class Packages_List_Table extends WP_List_Table
         </script>
 
 <?php
+
         // Check if any rows were returned
         if ($wpdb->num_rows > 0) {
 
