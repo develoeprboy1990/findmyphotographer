@@ -661,6 +661,17 @@ add_shortcode('premium_listings', 'premium_listings_shortcode');
 function custom_remove_all_quantity_fields( $return, $product ) {return true;}
 add_filter( 'woocommerce_is_sold_individually','custom_remove_all_quantity_fields', 10, 2 );
 
+
+function make_display_name_optional( $fields ) {
+    if ( isset( $fields['account_display_name'] ) ) {
+        $fields['account_display_name']['required'] = false;
+    }
+    return $fields;
+}
+add_filter( 'woocommerce_checkout_fields', 'make_display_name_optional' );
+add_filter( 'woocommerce_edit_account_form_fields', 'make_display_name_optional' );
+
+
  
 
 
