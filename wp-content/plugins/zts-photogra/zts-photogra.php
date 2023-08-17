@@ -78,7 +78,7 @@
 
 
 
-defined( 'ABSPATH' ) || die( 'Cant Access To Plugin' );
+defined('ABSPATH') || die('Cant Access To Plugin');
 
 
 
@@ -255,9 +255,6 @@ function zts_custom_table()
 
 
     dbDelta($sql);
-
-
-
 }
 
 
@@ -326,11 +323,12 @@ function zts_custom_table()
 
 
 
-add_action( 'wp_enqueue_scripts', 'max_add_style_sheets' );
+add_action('wp_enqueue_scripts', 'max_add_style_sheets');
 
 
 
-function max_add_style_sheets() {
+function max_add_style_sheets()
+{
 
 
 
@@ -354,19 +352,19 @@ function max_add_style_sheets() {
 
 
 
-    
-
-
-
-    wp_register_style( 'zts_business_css', plugin_dir_url( __FILE__ ) .'assets/css/business.css', array(), '4.0.13' );
 
 
 
 
+    wp_register_style('zts_business_css', plugin_dir_url(__FILE__) . 'assets/css/business.css', array(), '4.0.13');
 
 
 
-    wp_register_style( 'select2_css', plugin_dir_url( __FILE__ ) .'assets/css/select2.min.css', array(), '4.0.13' );
+
+
+
+
+    wp_register_style('select2_css', plugin_dir_url(__FILE__) . 'assets/css/select2.min.css', array(), '4.0.13');
 
 
 
@@ -390,7 +388,7 @@ function max_add_style_sheets() {
 
 
 
-    wp_register_style( 'zts_gallery_bootstrap_css', plugin_dir_url( __FILE__ ) .'assets/css/gallery/bootstrap.min.css', array(), '4.0.13' );
+    wp_register_style('zts_gallery_bootstrap_css', plugin_dir_url(__FILE__) . 'assets/css/gallery/bootstrap.min.css', array(), '4.0.13');
 
 
 
@@ -398,7 +396,7 @@ function max_add_style_sheets() {
 
 
 
-    wp_register_style( 'zts_gallery_font_awsome', plugin_dir_url( __FILE__ ) .'assets/css/gallery/font-awesome_all.css', array(), '4.0.13' );
+    wp_register_style('zts_gallery_font_awsome', plugin_dir_url(__FILE__) . 'assets/css/gallery/font-awesome_all.css', array(), '4.0.13');
 
 
 
@@ -406,7 +404,7 @@ function max_add_style_sheets() {
 
 
 
-    wp_register_style( 'zts_gallery_fileinput', plugin_dir_url( __FILE__ ) .'assets/css/gallery/fileinput.min.css', array(), '4.0.13' );
+    wp_register_style('zts_gallery_fileinput', plugin_dir_url(__FILE__) . 'assets/css/gallery/fileinput.min.css', array(), '4.0.13');
 
 
 
@@ -414,7 +412,7 @@ function max_add_style_sheets() {
 
 
 
-    wp_register_style( 'zts_gallery_css', plugin_dir_url( __FILE__ ) .'assets/css/gallery/gallery.css', array(), '4.0.13' );
+    wp_register_style('zts_gallery_css', plugin_dir_url(__FILE__) . 'assets/css/gallery/gallery.css', array(), '4.0.13');
 
 
 
@@ -422,7 +420,7 @@ function max_add_style_sheets() {
 
 
 
-   wp_register_style( 'zts_pagination_css', plugin_dir_url( __FILE__ ) .'assets/pagination/simplePagination.css', array(), '4.0.13' );
+    wp_register_style('zts_pagination_css', plugin_dir_url(__FILE__) . 'assets/pagination/simplePagination.css', array(), '4.0.13');
 
 
 
@@ -454,7 +452,7 @@ function max_add_style_sheets() {
 
 
 
-     wp_register_script( 'zts_pagination_js',  plugin_dir_url( __FILE__ ) .'assets/pagination/jquery.simplePagination.js', array( 'jquery' ), '4.0.13', true );
+    wp_register_script('zts_pagination_js',  plugin_dir_url(__FILE__) . 'assets/pagination/jquery.simplePagination.js', array('jquery'), '4.0.13', true);
 
 
 
@@ -470,7 +468,7 @@ function max_add_style_sheets() {
 
 
 
-    wp_register_script( 'select2_js',  plugin_dir_url( __FILE__ ) .'assets/js/select2.min.js', array( 'jquery' ), '4.0.13', true );
+    wp_register_script('select2_js',  plugin_dir_url(__FILE__) . 'assets/js/select2.min.js', array('jquery'), '4.0.13', true);
 
 
 
@@ -478,7 +476,7 @@ function max_add_style_sheets() {
 
 
 
-    wp_enqueue_script( 'select2_js' );
+    wp_enqueue_script('select2_js');
 
 
 
@@ -506,7 +504,7 @@ function max_add_style_sheets() {
 
 
 
-    wp_register_script( 'zts_bs_file_input',  plugin_dir_url( __FILE__ ) .'assets/js/gallery/bootstrap-fileinput.min.js', array( 'jquery' ), '4.0.13', true );
+    wp_register_script('zts_bs_file_input',  plugin_dir_url(__FILE__) . 'assets/js/gallery/bootstrap-fileinput.min.js', array('jquery'), '4.0.13', true);
 
 
 
@@ -514,7 +512,7 @@ function max_add_style_sheets() {
 
 
 
-    wp_register_script( 'zts_file_input_theme',  plugin_dir_url( __FILE__ ) .'assets/js/gallery/bootstrap-fileinput_themes_theme.min.js', array( 'jquery' ), '4.0.13', true );
+    wp_register_script('zts_file_input_theme',  plugin_dir_url(__FILE__) . 'assets/js/gallery/bootstrap-fileinput_themes_theme.min.js', array('jquery'), '4.0.13', true);
 
 
 
@@ -522,7 +520,7 @@ function max_add_style_sheets() {
 
 
 
-    wp_register_script( 'zts_bs_min',  plugin_dir_url( __FILE__ ) .'assets/js/gallery/bootstrap.min.js', array( 'jquery' ), '4.0.13', true );
+    wp_register_script('zts_bs_min',  plugin_dir_url(__FILE__) . 'assets/js/gallery/bootstrap.min.js', array('jquery'), '4.0.13', true);
 
 
 
@@ -530,7 +528,7 @@ function max_add_style_sheets() {
 
 
 
-    wp_register_script( 'zts_bs_pooper',  plugin_dir_url( __FILE__ ) .'assets/js/gallery/popper.min.js', array( 'jquery' ), '4.0.13', true );
+    wp_register_script('zts_bs_pooper',  plugin_dir_url(__FILE__) . 'assets/js/gallery/popper.min.js', array('jquery'), '4.0.13', true);
 
 
 
@@ -538,7 +536,7 @@ function max_add_style_sheets() {
 
 
 
-    wp_register_script( 'zts_gallery_main_js',  plugin_dir_url( __FILE__ ) .'assets/js/gallery/gallery.js', array( 'jquery' ), '4.0.13', true );
+    wp_register_script('zts_gallery_main_js',  plugin_dir_url(__FILE__) . 'assets/js/gallery/gallery.js', array('jquery'), '4.0.13', true);
 
 
 
@@ -562,7 +560,7 @@ function max_add_style_sheets() {
 
 
 
-    wp_register_script( 'zts_ajax_script', plugin_dir_url( __FILE__ ) . 'assets/js/script.js', array(), '1.1.0', true );
+    wp_register_script('zts_ajax_script', plugin_dir_url(__FILE__) . 'assets/js/script.js', array(), '1.1.0', true);
 
 
 
@@ -570,7 +568,7 @@ function max_add_style_sheets() {
 
 
 
-    wp_enqueue_script( 'zts_ajax_script' );
+    wp_enqueue_script('zts_ajax_script');
 
 
 
@@ -578,7 +576,7 @@ function max_add_style_sheets() {
 
 
 
-    $get_setting =  get_option( 'mma_settings' );
+    $get_setting =  get_option('mma_settings');
 
 
 
@@ -594,7 +592,7 @@ function max_add_style_sheets() {
 
 
 
-        'ajax_url'       => admin_url( 'admin-ajax.php' ),
+        'ajax_url'       => admin_url('admin-ajax.php'),
 
 
 
@@ -618,7 +616,7 @@ function max_add_style_sheets() {
 
 
 
-        'loader_gif_url' => plugin_dir_url( __FILE__ ) . 'assets/images/g-loader.gif',
+        'loader_gif_url' => plugin_dir_url(__FILE__) . 'assets/images/g-loader.gif',
 
 
 
@@ -650,7 +648,6 @@ function max_add_style_sheets() {
 
 
 
-    
 
 
 
@@ -658,14 +655,8 @@ function max_add_style_sheets() {
 
 
 
-    wp_localize_script( 'zts_ajax_script', 'zts_ajax_url', $localized_vars );
 
-
-
-
-
-
-
+    wp_localize_script('zts_ajax_script', 'zts_ajax_url', $localized_vars);
 }
 
 
@@ -834,7 +825,8 @@ function max_add_style_sheets() {
 
 
 
-function add_custom_checkout_fields() {
+function add_custom_checkout_fields()
+{
 
 
 
@@ -883,13 +875,7 @@ function add_custom_checkout_fields() {
 
 
         </div>';
-
-
-
     }
-
-
-
 }
 
 
@@ -902,7 +888,8 @@ add_action('woocommerce_checkout_before_customer_details', 'add_custom_checkout_
 
 
 
-function store_custom_checkout_fields() {
+function store_custom_checkout_fields()
+{
 
 
 
@@ -915,9 +902,6 @@ function store_custom_checkout_fields() {
 
 
             WC()->session->set('account_email', sanitize_email($_POST['account_email']));
-
-
-
         }
 
 
@@ -931,17 +915,8 @@ function store_custom_checkout_fields() {
 
 
             WC()->session->set('account_password', sanitize_text_field($_POST['account_password']));
-
-
-
         }
-
-
-
     }
-
-
-
 }
 
 
@@ -954,7 +929,8 @@ add_action('woocommerce_checkout_process', 'store_custom_checkout_fields');
 
 
 
-function register_user_after_order($order_id) {
+function register_user_after_order($order_id)
+{
 
 
 
@@ -987,9 +963,6 @@ function register_user_after_order($order_id) {
 
 
             return;
-
-
-
         }
 
 
@@ -1055,13 +1028,7 @@ function register_user_after_order($order_id) {
 
 
                 $order->save();
-
-
-
             }
-
-
-
         }
 
 
@@ -1075,17 +1042,11 @@ function register_user_after_order($order_id) {
 
 
         WC()->session->__unset('account_password');
-
-
-
-    }else{
+    } else {
 
 
 
         $user_id = get_current_user_id();
-
-
-
     }
 
 
@@ -1094,7 +1055,7 @@ function register_user_after_order($order_id) {
 
     $table_name = $wpdb->prefix . 'zts_user_data';
 
- 
+
 
 
 
@@ -1139,8 +1100,7 @@ function register_user_after_order($order_id) {
         );
 
         return;
-
-    } 
+    }
 
 
 
@@ -1170,7 +1130,7 @@ function register_user_after_order($order_id) {
 
 
 
-        $remove_slashes= stripslashes($cookies_data);
+        $remove_slashes = stripslashes($cookies_data);
 
 
 
@@ -1210,7 +1170,7 @@ function register_user_after_order($order_id) {
 
 
 
-        if($get_form_array->product_scope == 'free'){
+        if ($get_form_array->product_scope == 'free') {
 
 
 
@@ -1279,14 +1239,7 @@ function register_user_after_order($order_id) {
 
 
             );
-
-
-
-
-
-
-
-        }else{
+        } else {
 
 
 
@@ -1383,13 +1336,6 @@ function register_user_after_order($order_id) {
 
 
             );
-
-
-
-
-
-
-
         }
 
 
@@ -1439,13 +1385,6 @@ function register_user_after_order($order_id) {
 
 
             $wpdb->update($table_name, $data, array('user_id' => $user_id));
-
-
-
-
-
-
-
         } else {
 
 
@@ -1471,41 +1410,8 @@ function register_user_after_order($order_id) {
 
 
             $wpdb->insert($table_name, $data);
-
-
-
-
-
-
-
-
-
-
-
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
-
-
-
 }
 
 
@@ -1526,23 +1432,22 @@ add_filter('woocommerce_thankyou_order_received_text', 'zts_change_data_on_thank
 
 
 
-function zts_change_data_on_thankou_page($thankyou_message, $order) {
+function zts_change_data_on_thankou_page($thankyou_message, $order)
+{
 
 
 
-    $thankyou_message = 'Your plan has successfully purchase ';
+    $thankyou_message = 'Your Plan Has Been Successfully Purchased';
 
 
 
     return $thankyou_message;
-
-
-
 }
 
 
 
-function zts_change_thankyou_text( $translated_text, $text, $domain ) {
+function zts_change_thankyou_text($translated_text, $text, $domain)
+{
 
 
 
@@ -1550,7 +1455,7 @@ function zts_change_thankyou_text( $translated_text, $text, $domain ) {
 
 
 
-    if ( $domain === 'woocommerce' && $text === 'Order received' ) {
+    if ($domain === 'woocommerce' && $text === 'Order received') {
 
 
 
@@ -1559,26 +1464,20 @@ function zts_change_thankyou_text( $translated_text, $text, $domain ) {
 
 
         $translated_text = 'Thank You For Your Order';
-
-
-
     }
 
 
 
-    
+
 
 
 
     return $translated_text;
-
-
-
 }
 
 
 
-add_filter( 'gettext', 'zts_change_thankyou_text', 20, 3 );
+add_filter('gettext', 'zts_change_thankyou_text', 20, 3);
 
 
 
@@ -1590,14 +1489,12 @@ add_filter('woocommerce_order_item_quantity_html', 'zts_remove_qunatity_from_tha
 
 
 
-function zts_remove_qunatity_from_thankyou_page($quantity_html, $item) {
+function zts_remove_qunatity_from_thankyou_page($quantity_html, $item)
+{
 
 
 
     return '';
-
-
-
 }
 
 
@@ -1614,7 +1511,8 @@ add_action('woocommerce_thankyou', 'zts_remove_shipping_from_thankyou', 10, 1);
 
 
 
-function zts_remove_shipping_from_thankyou($order_id) {
+function zts_remove_shipping_from_thankyou($order_id)
+{
 
 
 
@@ -1622,22 +1520,16 @@ function zts_remove_shipping_from_thankyou($order_id) {
 
 
 
-    
 
 
 
-    if ( ! $order->needs_shipping_address() ) {
+
+    if (!$order->needs_shipping_address()) {
 
 
 
         remove_action('woocommerce_thankyou', 'woocommerce_order_shipping_to_display', 10);
-
-
-
     }
-
-
-
 }
 
 
@@ -1654,7 +1546,8 @@ add_action('woocommerce_thankyou', 'add_custom_button_to_thankyou_page');
 
 
 
-function add_custom_button_to_thankyou_page($order_id) {
+function add_custom_button_to_thankyou_page($order_id)
+{
 
 
 
@@ -1671,13 +1564,7 @@ function add_custom_button_to_thankyou_page($order_id) {
 
 
         echo '<a style="margin-top:20px;" href="' . get_site_url() . '/my-account" class="button">Login</a>';
-
-
-
     }
-
-
-
 }
 
 
@@ -1694,11 +1581,12 @@ function add_custom_button_to_thankyou_page($order_id) {
 
 
 
-function zts_login_shortcodes() {
+function zts_login_shortcodes()
+{
 
 
 
-    if ( is_user_logged_in() ) {
+    if (is_user_logged_in()) {
 
 
 
@@ -1710,42 +1598,33 @@ function zts_login_shortcodes() {
 
 
 
-        $logout_url = wp_logout_url( home_url() );
+        $logout_url = wp_logout_url(home_url());
 
 
 
-        
+
 
 
 
         $output =  '<a href="' . $logout_url . '">Logout</a>';
-
-
-
     } else {
 
 
 
-        $my_account_url = get_permalink( get_option('woocommerce_myaccount_page_id') );
+        $my_account_url = get_permalink(get_option('woocommerce_myaccount_page_id'));
 
 
 
         $output = '<a href="' . $my_account_url . '">LOG IN</a>';
-
-
-
     }
 
 
 
-    
+
 
 
 
     return $output;
-
-
-
 }
 
 
@@ -1754,15 +1633,16 @@ function zts_login_shortcodes() {
 
 
 
-add_shortcode( 'ZTS_LOGIN_USER', 'zts_login_shortcodes' );
+add_shortcode('ZTS_LOGIN_USER', 'zts_login_shortcodes');
 
 
 
-function zts_add_business_btn_shortcodes() {
+function zts_add_business_btn_shortcodes()
+{
 
 
 
-if ( is_user_logged_in() ) {
+    if (is_user_logged_in()) {
 
 
 
@@ -1770,39 +1650,30 @@ if ( is_user_logged_in() ) {
 
 
 
-        $output = '<a class="add-business-btn" href="'.$url.'"><span class="add-business-button-content-wrapper"><i aria-hidden="true" class="fa fa-handshake"></i>     
+        $output = '<a class="add-business-btn" href="' . $url . '"><span class="add-business-button-content-wrapper"><i aria-hidden="true" class="fa fa-handshake"></i>     
 
 
 
                         My LISTING </span></a>';
-
-
-
     } else {
 
 
 
-          $output = '<a class="add-business-btn" href="/add-business"><span class="add-business-button-content-wrapper"><i aria-hidden="true" class="fa fa-handshake"></i>     
+        $output = '<a class="add-business-btn" href="/add-business"><span class="add-business-button-content-wrapper"><i aria-hidden="true" class="fa fa-handshake"></i>     
 
 
 
                         ADD BUSINESS </span></a>';
-
-
-
     }
 
 
 
     return $output;
-
-
-
 }
 
 
 
-add_shortcode( 'ZTS_ADD_BUSINESS_BTN', 'zts_add_business_btn_shortcodes' );
+add_shortcode('ZTS_ADD_BUSINESS_BTN', 'zts_add_business_btn_shortcodes');
 
 
 
@@ -1814,7 +1685,8 @@ add_shortcode( 'ZTS_ADD_BUSINESS_BTN', 'zts_add_business_btn_shortcodes' );
 
 
 
-function zts_custom_login_redirect($redirect, $user) {
+function zts_custom_login_redirect($redirect, $user)
+{
 
 
 
@@ -1822,14 +1694,11 @@ function zts_custom_login_redirect($redirect, $user) {
 
 
 
-    $redirect = get_site_url().'/my-account/zts-tab';
+    $redirect = get_site_url() . '/my-account/zts-tab';
 
 
 
     return $redirect;
-
-
-
 }
 
 
@@ -1850,7 +1719,8 @@ add_filter('woocommerce_login_redirect', 'zts_custom_login_redirect', 10, 2);
 
 
 
-function zts_custom_refund_hook($order_id) {
+function zts_custom_refund_hook($order_id)
+{
 
 
 
@@ -1898,15 +1768,15 @@ function zts_custom_refund_hook($order_id) {
 
 
 
-        array( 'order_id' => $order_id ),
+        array('order_id' => $order_id),
 
 
 
-        array( '%d', '%s' ),
+        array('%d', '%s'),
 
 
 
-        array( '%s' )
+        array('%s')
 
 
 
@@ -1923,9 +1793,6 @@ function zts_custom_refund_hook($order_id) {
 
 
     error_log('Order ' . $order_id . ' has been refunded by the admin.');
-
-
-
 }
 
 
@@ -1934,7 +1801,8 @@ add_action('woocommerce_order_status_changed', 'zts_check_refund_status', 10, 3)
 
 
 
-function zts_check_refund_status($order_id, $old_status, $new_status) {
+function zts_check_refund_status($order_id, $old_status, $new_status)
+{
 
 
 
@@ -1943,13 +1811,7 @@ function zts_check_refund_status($order_id, $old_status, $new_status) {
 
 
         zts_custom_refund_hook($order_id);
-
-
-
     }
-
-
-
 }
 
 
@@ -1960,7 +1822,8 @@ function zts_check_refund_status($order_id, $old_status, $new_status) {
 
  */
 
-function zts_remove_order_notes_checkout() {
+function zts_remove_order_notes_checkout()
+{
 
     // Check if WooCommerce is active.
 
@@ -1970,14 +1833,12 @@ function zts_remove_order_notes_checkout() {
 
         add_filter('woocommerce_enable_order_notes_field', '__return_false');
 
-        
+
 
         // Hide the empty div associated with the order notes field.
 
         add_action('wp_footer', 'zts_hide_order_notes_div');
-
     }
-
 }
 
 add_action('init', 'zts_remove_order_notes_checkout');
@@ -1990,21 +1851,20 @@ add_action('init', 'zts_remove_order_notes_checkout');
 
  */
 
-function zts_hide_order_notes_div() {
+function zts_hide_order_notes_div()
+{
 
-    ?>
+?>
 
     <style>
-
         .woocommerce-additional-fields {
 
             display: none !important;
 
         }
-
     </style>
 
-    <?php
+<?php
 
 }
 
@@ -2016,7 +1876,7 @@ function zts_hide_order_notes_div() {
 
 
 
-require_once plugin_dir_path( __FILE__ ) . 'admin/admin-menu.php';
+require_once plugin_dir_path(__FILE__) . 'admin/admin-menu.php';
 
 
 
@@ -2024,7 +1884,7 @@ require_once plugin_dir_path( __FILE__ ) . 'admin/admin-menu.php';
 
 
 
-require_once plugin_dir_path( __FILE__ ) . 'inc/custom-texonomy.php';
+require_once plugin_dir_path(__FILE__) . 'inc/custom-texonomy.php';
 
 
 
@@ -2032,7 +1892,7 @@ require_once plugin_dir_path( __FILE__ ) . 'inc/custom-texonomy.php';
 
 
 
-require_once plugin_dir_path( __FILE__ ) . 'inc/home-page.php';
+require_once plugin_dir_path(__FILE__) . 'inc/home-page.php';
 
 
 
@@ -2040,7 +1900,7 @@ require_once plugin_dir_path( __FILE__ ) . 'inc/home-page.php';
 
 
 
-require_once plugin_dir_path( __FILE__ ) . 'inc/add-business.php';
+require_once plugin_dir_path(__FILE__) . 'inc/add-business.php';
 
 
 
@@ -2048,7 +1908,7 @@ require_once plugin_dir_path( __FILE__ ) . 'inc/add-business.php';
 
 
 
-require_once plugin_dir_path( __FILE__ ) . 'inc/listing.php';
+require_once plugin_dir_path(__FILE__) . 'inc/listing.php';
 
 
 
@@ -2056,7 +1916,7 @@ require_once plugin_dir_path( __FILE__ ) . 'inc/listing.php';
 
 
 
-require_once plugin_dir_path( __FILE__ ) . 'inc/profile.php';
+require_once plugin_dir_path(__FILE__) . 'inc/profile.php';
 
 
 
@@ -2064,7 +1924,7 @@ require_once plugin_dir_path( __FILE__ ) . 'inc/profile.php';
 
 
 
-require_once plugin_dir_path( __FILE__ ) . 'inc/my-account.php';
+require_once plugin_dir_path(__FILE__) . 'inc/my-account.php';
 
 
 
@@ -2072,7 +1932,7 @@ require_once plugin_dir_path( __FILE__ ) . 'inc/my-account.php';
 
 
 
-require_once plugin_dir_path( __FILE__ ) . 'inc/crone.php';
+require_once plugin_dir_path(__FILE__) . 'inc/crone.php';
 
 
 
@@ -2080,4 +1940,4 @@ require_once plugin_dir_path( __FILE__ ) . 'inc/crone.php';
 
 
 
-require_once plugin_dir_path( __FILE__ ) . 'inc/helper.php';
+require_once plugin_dir_path(__FILE__) . 'inc/helper.php';
