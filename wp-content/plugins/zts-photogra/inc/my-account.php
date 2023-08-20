@@ -439,7 +439,7 @@ function zts_listing_tab_content()
                         <form method="POST" class="zts_renew_fm" style="float:right;">
                             <input type="hidden" name="plan_id" value="<?php echo $row['customer_plan'] ?>">
 
-                            <?php if ($row['priority'] == 1 || $row['priority'] == 2) { ?><button type="submit" name="zts_renew_sub">Revnew Subscription</button>
+                            <?php if ($row['priority'] == 1 || $row['priority'] == 2) { ?><button type="submit" name="zts_renew_sub">Renew Subscription</button>
                             <?php } ?>
                         </form>
                     </div>

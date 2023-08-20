@@ -75,7 +75,7 @@ function zts_add_business_callback($atts)
     <div id="step2" class="form-step">
       <?php
       require_once plugin_dir_path(__FILE__) . 'steps/business.php'; ?>
-      <div class="text-md-right text-center abc mt-5">
+      <div class="text-md-right text-center abc mt-5 buttons-collections">
         <button type="button" class="prev-btn ">Previous</button>
         <button type="button" class="next-btn zts_second_step_next">Next</button>
       </div>
@@ -83,7 +83,7 @@ function zts_add_business_callback($atts)
     <div id="step3" class="form-step">
       <?php
       require_once plugin_dir_path(__FILE__) . 'steps/review.php'; ?>
-      <div class="text-md-right text-center abc mt-5">
+      <div class="text-md-right text-center abc mt-5 buttons-collections">
         <button type="button" class="prev-btn mr-4 ">Previous</button>
         <button type="button" class="btn check-out zts_form_submit">
           Proceed To Checkout
