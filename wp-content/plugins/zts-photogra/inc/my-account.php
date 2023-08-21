@@ -1,75 +1,43 @@
 <?php
-
-
-
 function zts_add_custom_tab_to_my_account($tabs)
 {
     $row = getPackageData();
     // Add your custom tab
-
     $tabs = array_reverse($tabs);
     if ($row['priority'] == 1 || $row['priority'] == 2) {
         $tabs['zts-faq'] = 'Add FAQ';
     }
-
     $tabs['zts-tab'] = 'My Listing';
-
     $tabs = array_reverse($tabs);
-
-
-
     // Hide all other tabs except the My Listing tab
-
     $hidden_tabs = array(
-
         'dashboard',
-
         'orders',
-
         'downloads',
-
         'edit-address',
-
         'payment-methods',
-
     );
-
-
-
     foreach ($hidden_tabs as $tab) {
-
         if (isset($tabs[$tab])) {
-
             unset($tabs[$tab]);
         }
     }
-
-
-
     return $tabs;
 }
 add_filter('woocommerce_account_menu_items', 'zts_add_custom_tab_to_my_account');
-
-
-
-
 function getPackageData()
 {
     global $wpdb;
     $user_id = get_current_user_id();
     $table_name = $wpdb->prefix . 'zts_user_data';
-    $sql = $wpdb->prepare("SELECT * FROM $table_name WHERE user_id = %s", $user_id);
+    $sql = $wpdb->prepare("SELECT * FROM $table_name WHERE user_id = %s Order by id DESC", $user_id);
     $row = $wpdb->get_row($sql, ARRAY_A);
     return $row;
 }
 // Create content for the new tab
-
 function zts_listing_tab_content()
-
 {
-
     if (is_user_logged_in()) {
-
         wp_enqueue_style('zts_gallery_font_awsome'); ?>
         <!-- bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -83,7 +51,6 @@ function zts_listing_tab_content()
         <style type="text/css">
             #form-example-2 {
                 margin-bottom: 200px;
-
             }
         </style>
         <?php
@@ -93,9 +60,12 @@ function zts_listing_tab_content()
             echo '<script>window.location.href = "' . esc_url(wc_get_checkout_url()) . '";</script>';
             exit;
         }
+        if (isset($_POST['zts_upgrade_sub'])) {
+            $edit_url = get_site_url() . '/add-business/?type=upgrade';
+            echo '<script>window.location.href = "' . $edit_url . '";</script>';
+            exit;
+        }
         global $wpdb;
-
-
         $table_name = $wpdb->prefix . 'zts_user_data';
         $row = getPackageData();
         $user_id = $row['user_id'];
@@ -131,158 +101,84 @@ function zts_listing_tab_content()
                     'children' => $child_term_array,
                 );
             }
-
-
-
             // get categories.
-
             $categories = get_terms(array(
-
                 'taxonomy' => 'product_cat',
-
                 'hide_empty' => false,
-
                 'exclude' => array(get_option('default_product_cat')),
-
             ));
-
-
-
-
-
             if (isset($_POST['zts_edit_gallery'])) {
-
-
-
                 if ($_POST['zts_priority'] == '1' || $_POST['zts_priority'] == '2') {
-
                     // for gallery images
-
                     $file_array = $_FILES['photos'];
-
                     if ($file_array["size"][0] == 0) {
-
                         $old = $_POST['old'];
-
                         $old_images = array();
-
                         foreach ($old as $url) {
-
                             if (strpos($url, "http:") === 0 || strpos($url, "https:") === 0) {
-
                                 $old_images[] = $url;
                             }
                         }
-
                         $e_gallery_images = $old_images;
                     } else {
-
                         $old = $_POST['old'];
-
                         $old_images = array();
-
                         foreach ($old as $url) {
-
                             if (strpos($url, "http:") === 0 || strpos($url, "https:") === 0) {
-
                                 $old_images[] = $url;
                             }
                         }
-
                         $upload_dir = wp_upload_dir(); // Get the WordPress upload directory
-
                         $upload_path = $upload_dir['path'] . '/';
-
                         foreach ($file_array['name'] as $key => $name) {
-
                             $file = array(
-
                                 'name'     => $file_array['name'][$key],
-
                                 'type'     => $file_array['type'][$key],
-
                                 'tmp_name' => $file_array['tmp_name'][$key],
-
                                 'error'    => $file_array['error'][$key],
-
                                 'size'     => $file_array['size'][$key]
 
                             );
-
                             $file_name = $file['name'];
-
                             $file_path = $upload_path . $file_name;
-
                             if (move_uploaded_file($file['tmp_name'], $file_path)) {
-
                                 $uploaded_files[] = $file_name;
-
                                 $attachment_id = wp_insert_attachment(array(
-
                                     'post_title'     => $file_name,
-
                                     'post_mime_type' => $file['type'],
-
                                     'post_status'    => 'inherit',
-
                                     'guid'           => $upload_dir['url'] . '/' . $file_name
-
                                 ), $file_path);
-
                                 $attachment_id = get_the_guid($attachment_id);
-
                                 $gallery_new_images[] = $attachment_id; // Store attachment ID in the associative array
-
                             }
                         }
 
                         // Merge the new_images and old_images arrays
-
                         $e_gallery_images = array_merge($gallery_new_images, $old_images);
                     }
-
                     // for profile image.
-
                     $e_profile = $_FILES["e_comp_profile"];
-
                     // Check if the file is empty
-
                     if ($e_profile["size"] == 0) {
-
                         $send_profile = $_POST['e_comp_profile_h'];
                     } else {
-
                         $upload_dir = wp_upload_dir(); // Get the WordPress upload directory
-
                         $upload_path = $upload_dir['path'] . '/';
-
                         $profile_image_name = $e_profile['name'];
-
                         $profile_image_path = $upload_path . $profile_image_name;
-
                         if (move_uploaded_file($e_profile['tmp_name'], $profile_image_path)) {
-
                             $send_profile = wp_insert_attachment(array(
-
                                 'post_title'     => $profile_image_name,
-
                                 'post_mime_type' => $e_profile['type'],
-
                                 'post_status'    => 'inherit',
-
                                 'guid'           => $upload_dir['url'] . '/' . $profile_image_name
 
                             ), $profile_image_path);
                         }
                     }
 
-
-
-
-
-
-
-                    // Define the data you want to update
+                   // Define the data you want to update
 
                     $data = array(
 
@@ -301,140 +197,63 @@ function zts_listing_tab_content()
                         'locations' => serialize($_POST['l_location'])
 
                     );
-
-
-
                     // Define the WHERE condition to identify the row(s) to update
-
                     $where = array(
-
                         'user_id' => $user_id // Example condition
-
                     );
-
                     // Update the data in the table
-
                     $wpdb->update($table_name, $data, $where);
-
                     // Output JavaScript code to perform the redirect
-
                     echo '<script>window.location.href = "' . esc_url(get_site_url()) . '/my-account/zts-tab";</script>';
-
                     exit;
                 } else {
-
                     $data = array(
-
                         'company_name' => $_POST['company_name'],
-
                         'company_url' => $_POST['company_url'],
-
                         'categories' => serialize($_POST['l_category']),
-
                         'locations' => serialize($_POST['l_location'])
-
                     );
-
-
-
                     // Define the WHERE condition to identify the row(s) to update
-
                     $where = array(
-
                         'user_id' => $user_id // Example condition
-
                     );
-
                     // Update the data in the table
-
                     $wpdb->update($table_name, $data, $where);
-
-
-
                     // Output JavaScript code to perform the redirect
-
                     echo '<script>window.location.href = "' . esc_url(get_site_url()) . '/my-account/zts-tab";</script>';
-
                     exit;
                 }
             }
 
-
-
-            $edit_id = isset($_GET['edit']) ? $_GET['edit'] : '';
-
+           $edit_id = isset($_GET['edit']) ? $_GET['edit'] : '';
             $profile_url = get_site_url() . '/profile-page/?user=' . $row['company_name'];
-
             $d_prifile_img = get_the_guid($row['profile_image']);
-
-
-
             // Get the product object
-
             $product = wc_get_product($row['customer_plan']);
-
             $product_name = $product->get_name();
-
-
-
             // Get the user object
-
             $user = get_user_by('ID', $row['user_id']);
-
-
-
             // Get the user login name
-
             $user_login = $user->user_login;
-
-
-
-
-
             // plan days.
-
             $plan_type = strtolower($product->get_description());
-
             $created_at = strtotime($row['created_at']); // Assuming 'created_at' is a valid date/time format
-
-
-
             if ($plan_type == '1 year') {
-
                 $days = 365;
             } elseif ($plan_type == '2 years') {
-
                 $days = 730;
             }
-
-
-
-
-
-
-
+            $remaining_days = '';
             if ($row['priority'] == 1 || $row['priority'] == 2) {
-
                 $now = time(); // Current timestamp
-
                 $expiration_date = $created_at + ($days * 24 * 60 * 60);
-
                 $remaining_days = max(0, floor(($expiration_date - $now) / (24 * 60 * 60)));
             }
-
-
-
-
-
             // set date format.
-
             $date = DateTime::createFromFormat('Y-m-d H:i:s', $row['created_at']);
-
             $formattedDate = $date->format('Y-m-d');
-
             if (empty($edit_id)) {
-                if ($row['expiry'] == 1 || $remaining_days <= 5) {
-        ?>
+                if ($row['expiry'] == 1 || $remaining_days <= 5) {?>
                     <div>
                         <form method="POST" class="zts_renew_fm" style="float:right;">
                             <input type="hidden" name="plan_id" value="<?php echo $row['customer_plan'] ?>">
@@ -446,6 +265,16 @@ function zts_listing_tab_content()
                     <br />
                 <?php
                 }
+                if($row['priority'] == 3)
+                { ?>
+                <div>
+                    <form method="POST" class="zts_renew_fm" style="float:right;">
+                        <input type="hidden" name="plan_id" value="<?php echo $row['customer_plan'] ?>">
+                        <button type="submit" name="zts_upgrade_sub">Upgrade To Featured</button>
+                    </form>
+                </div>
+                <br />
+                <?php }
                 echo '<h3>My Listing</h3>';
                 echo '<div class="table-responsive">';
                 echo '<table id="table_id" >';

@@ -2,7 +2,7 @@
 add_shortcode('ZTS_ADD_BUSINESS',  'zts_add_business_callback');
 
 function zts_add_business_callback($atts)
-{
+{ 
   ob_start();
   wp_enqueue_style('zts_business_css');
   wp_enqueue_style('zts_gallery_bootstrap_css');
@@ -64,7 +64,7 @@ function zts_add_business_callback($atts)
     'hide_empty' => false,
     'hierarchical' => true, // Enable hierarchical display
     'parent' => 0, // Set parent parameter to 0 to retrieve only top-level terms
-  ));?>
+  )); ?>
   <form id="myForm">
     <div id="step1" class="form-step">
       <?php require_once plugin_dir_path(__FILE__) . 'steps/plans.php'; ?>
@@ -93,13 +93,14 @@ function zts_add_business_callback($atts)
   </form>
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
   <script>
-    $(document).ready(function() {
+    $(document).ready(function() { 
       var currentStep = 1;
       var totalSteps = $('.form-step').length;
-      
+
       $('.next-btn').click(function(e) {
         e.preventDefault();
-        var zts_exist = $('.zts_exist').val();
+        var zts_exist   = $('.zts_exist').val();
+        var currentPlan = $('#currentPlan').val();
         if (zts_exist == 1) {
           alert('you already have Active Plan. Kindly Contact admin  to Cancel that Plan first');
           return false;
@@ -111,7 +112,9 @@ function zts_add_business_callback($atts)
             var account_email = $('#account_email').val();
             if (account_email == '') {
               $('.zts_email_address_error').text('Email Address is Required').show();
-              document.querySelector("#account_email").scrollIntoView({ behavior: "smooth" });
+              document.querySelector("#account_email").scrollIntoView({
+                behavior: "smooth"
+              });
               return;
             } else {
               $('.zts_email_address_error').hide();
@@ -120,7 +123,9 @@ function zts_add_business_callback($atts)
             if (account_password == '') {
               $('.zts_password_error').text('Password is Required').show();
 
-              document.querySelector("#account_password").scrollIntoView({ behavior: "smooth" });
+              document.querySelector("#account_password").scrollIntoView({
+                behavior: "smooth"
+              });
               return;
             } else {
               $('.zts_password_error').hide();
@@ -128,7 +133,9 @@ function zts_add_business_callback($atts)
             var zts_comp_name = $('.zts_comp_name').val();
             if (zts_comp_name == '') {
               $('.zts_comp_name_error').text('Enter a valid company name').show();
-              document.querySelector('.zts_comp_name').scrollIntoView({ behavior: "smooth" });
+              document.querySelector('.zts_comp_name').scrollIntoView({
+                behavior: "smooth"
+              });
               return;
             } else {
               $('.zts_comp_name_error').hide();
@@ -138,7 +145,9 @@ function zts_add_business_callback($atts)
             if (zts_comp_url == '') {
               $('.zts_comp_url_error').text('Enter a valied company url').show();
 
-              document.querySelector(".zts_comp_url").scrollIntoView({ behavior: "smooth" });
+              document.querySelector(".zts_comp_url").scrollIntoView({
+                behavior: "smooth"
+              });
               return;
             } else {
               $('.zts_comp_url_error').hide();
@@ -147,7 +156,9 @@ function zts_add_business_callback($atts)
             if (categories == '' || categories == 'Select Category') {
               $('.zts_categories_select2_error').text('Select Category').show();
 
-              document.querySelector(".zts_categories_select2").scrollIntoView({ behavior: "smooth" });
+              document.querySelector(".zts_categories_select2").scrollIntoView({
+                behavior: "smooth"
+              });
               return;
             } else {
               $('.zts_categories_select2_error').hide();
@@ -156,7 +167,9 @@ function zts_add_business_callback($atts)
             if (location == '' || location == 'Select Location') {
               $('.get_form_location_error').text('Select Location').show();
 
-              document.querySelector(".get_form_location_id").scrollIntoView({ behavior: "smooth" });
+              document.querySelector(".get_form_location_id").scrollIntoView({
+                behavior: "smooth"
+              });
               return;
             } else {
               $('.get_form_location_error').hide();
@@ -166,7 +179,9 @@ function zts_add_business_callback($atts)
             if (zts_comp_name == '') {
               $('.zts_comp_name_error').text('Enter a valid company name').show();
 
-              document.querySelector(".zts_comp_name").scrollIntoView({ behavior: "smooth" });
+              document.querySelector(".zts_comp_name").scrollIntoView({
+                behavior: "smooth"
+              });
               return;
             } else {
               $('.zts_comp_name_error').hide();
@@ -176,7 +191,9 @@ function zts_add_business_callback($atts)
 
               $('.zts_comp_url_error').text('Enter a valied company url').show();
 
-              document.querySelector(".zts_comp_url").scrollIntoView({ behavior: "smooth" });
+              document.querySelector(".zts_comp_url").scrollIntoView({
+                behavior: "smooth"
+              });
               return;
             } else {
               $('.zts_comp_url_error').hide();
@@ -186,7 +203,9 @@ function zts_add_business_callback($atts)
             if (phone == '') {
               $('.zts_business_error').text('Enter a valied Phone NO').show();
 
-              document.querySelector(".zts_business_phone").scrollIntoView({ behavior: "smooth" });
+              document.querySelector(".zts_business_phone").scrollIntoView({
+                behavior: "smooth"
+              });
               return;
             } else {
               $('.zts_business_error').hide();
@@ -195,7 +214,9 @@ function zts_add_business_callback($atts)
             if (fileInput[0].files.length === 0) {
               $('.zts_file_upload_error').text('Profile Image is not Selected').show();
 
-              document.querySelector(".zts_comp_profile_cont").scrollIntoView({ behavior: "smooth" });
+              document.querySelector(".zts_comp_profile_cont").scrollIntoView({
+                behavior: "smooth"
+              });
               return;
             } else {
               $('.zts_file_upload_error').hide();
@@ -204,7 +225,9 @@ function zts_add_business_callback($atts)
             if (gallery[0].files.length === 0) {
               $('.get_gallery_error').text('Gallery Image is not Selected').show();
 
-              document.querySelector("#multiplefileupload").scrollIntoView({ behavior: "smooth" });
+              document.querySelector("#multiplefileupload").scrollIntoView({
+                behavior: "smooth"
+              });
               return;
             } else {
               $('.get_gallery_error').hide();
@@ -213,7 +236,9 @@ function zts_add_business_callback($atts)
             if (categories == '' || categories == 'Select Category') {
               $('.zts_categories_select2_error').text('Select Category').show();
 
-              document.querySelector(".zts_categories_select2").scrollIntoView({ behavior: "smooth" });
+              document.querySelector(".zts_categories_select2").scrollIntoView({
+                behavior: "smooth"
+              });
               return;
             } else {
               $('.zts_categories_select2_error').hide();
@@ -222,7 +247,9 @@ function zts_add_business_callback($atts)
             if (location == '' || location == 'Select Location') {
               $('.get_form_location_error').text('Select Location').show();
 
-              document.querySelector(".get_form_location_id").scrollIntoView({ behavior: "smooth" });
+              document.querySelector(".get_form_location_id").scrollIntoView({
+                behavior: "smooth"
+              });
               return;
             } else {
               $('.get_form_location_error').hide();
@@ -236,7 +263,9 @@ function zts_add_business_callback($atts)
           currentStep++;
           $('#step' + currentStep).show();
           $("#myForm").scrollTop(0);
-          document.querySelector("#myForm").scrollIntoView({ behavior: "smooth" }); 
+          document.querySelector("#myForm").scrollIntoView({
+            behavior: "smooth"
+          });
         }
 
       });
@@ -248,8 +277,6 @@ function zts_add_business_callback($atts)
           $('#step' + currentStep).show();
         }
       });
-
-
     });
   </script>
 <?php
