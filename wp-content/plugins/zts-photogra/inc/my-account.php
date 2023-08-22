@@ -1,4 +1,20 @@
 <?php
+
+/*
+Plugin Name: Custom Editor Plugin
+Description: A plugin that adds a custom editor to the front end.
+Version: 1.0
+*/
+
+// Enqueue necessary scripts and styles
+function custom_editor_enqueue_scripts()
+{
+    wp_enqueue_script('tinymce', 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.0.0/tinymce.min.js', array(), '5.0.0', true);
+   /*  wp_enqueue_script('custom-editor', plugin_dir_url(__FILE__) . 'js/custom-editor.js', array('jquery', 'tinymce'), '1.0.0', true); */
+}
+add_action('wp_enqueue_scripts', 'custom_editor_enqueue_scripts');
+
+
 function zts_add_custom_tab_to_my_account($tabs)
 {
     $row = getPackageData();
@@ -178,7 +194,7 @@ function zts_listing_tab_content()
                         }
                     }
 
-                   // Define the data you want to update
+                    // Define the data you want to update
 
                     $data = array(
 
@@ -225,7 +241,7 @@ function zts_listing_tab_content()
                 }
             }
 
-           $edit_id = isset($_GET['edit']) ? $_GET['edit'] : '';
+            $edit_id = isset($_GET['edit']) ? $_GET['edit'] : '';
             $profile_url = get_site_url() . '/profile-page/?user=' . $row['company_name'];
             $d_prifile_img = get_the_guid($row['profile_image']);
             // Get the product object
@@ -251,9 +267,9 @@ function zts_listing_tab_content()
             }
             // set date format.
             $date = DateTime::createFromFormat('Y-m-d H:i:s', $row['created_at']);
-            $formattedDate = $date->format('Y-m-d');
+            $formattedDate = $date->format('d/m/Y');
             if (empty($edit_id)) {
-                if ($row['expiry'] == 1 || $remaining_days <= 5) {?>
+                if ($row['expiry'] == 1 || $remaining_days <= 5) { ?>
                     <div>
                         <form method="POST" class="zts_renew_fm" style="float:right;">
                             <input type="hidden" name="plan_id" value="<?php echo $row['customer_plan'] ?>">
@@ -265,51 +281,47 @@ function zts_listing_tab_content()
                     <br />
                 <?php
                 }
-                if($row['priority'] == 3)
-                { ?>
-                <div>
-                    <form method="POST" class="zts_renew_fm" style="float:right;">
-                        <input type="hidden" name="plan_id" value="<?php echo $row['customer_plan'] ?>">
-                        <button type="submit" name="zts_upgrade_sub">Upgrade To Featured</button>
-                    </form>
-                </div>
-                <br />
+                if ($row['priority'] == 3) { ?>
+                    <div>
+                        <form method="POST" class="zts_renew_fm" style="float:right;">
+                            <input type="hidden" name="plan_id" value="<?php echo $row['customer_plan'] ?>">
+                            <button type="submit" name="zts_upgrade_sub">Upgrade To Featured</button>
+                        </form>
+                    </div>
+                    <br />
                 <?php }
                 echo '<h3>My Listing</h3>';
                 echo '<div class="table-responsive">';
                 echo '<table id="table_id" >';
                 echo '<thead>';
                 echo '<tr>';
-                echo '<th>User Name</th>';
-                echo '<th>Company Name</th>';
-                echo '<th>User Plan</th>';
-                echo '<th>Plan Start</th>';
+                echo '<th>Company</th>';
+                echo '<th>Plan</th>';
+                echo '<th>Start Date</th>';
                 if ($row['priority'] == 1 || $row['priority'] == 2) {
                     echo '<th>Remaining Days</th>';
                 }
-                echo '<th>Action</th>';
+                echo '<th>Actions</th>';
 
                 if ($row['priority'] == 1 || $row['priority'] == 2) {
-
-                    echo '<th>View</th>';
                 }
                 echo '</tr>';
                 echo '</thead>';
                 echo '<tbody style="text-align:center;">';
                 echo '<tr>';
-                echo '<td>' . $user_login . '</td>';
                 echo '<td>' . $row['company_name'] . '</td>';
                 echo '<td>' . $product_name . ' ' . $product->get_description() . '</td>';
                 echo '<td>' . $formattedDate . '</td>';
                 if ($row['priority'] == 1 || $row['priority'] == 2) {
                     echo '<td>'  . $remaining_days . '</td>';
                 }
-                echo '<td> <a target="blank" class="btn btn-primary edit-profile" href="' . $edit_url . '"><i class="fas fa-edit"></i></a></td>';
+                echo '<td> <a target="blank" title="Edit Profile"   href="' . $edit_url . '"><i class="fas fa-edit"></i></a>';
                 if ($row['priority'] == 1 || $row['priority'] == 2) {
-                    echo '<td> <a target="blank" class="btn btn-success view-profile" href="' . $profile_url . '">
-                    <i class="fas fa-eye"></i></a></td>';
+                    echo '  <a target="blank" title="view profile" href="' . $profile_url . '">
+                    <i class="fas fa-eye"></i></a>
+                     ';
                 }
-                echo '</tr>';
+                echo '</td></tr>';
                 echo '</tbody>';
                 echo '</table>';
                 echo '</div>';
@@ -543,7 +555,6 @@ function zts_listing_tab_content()
                             theme: "classic"
 
                         });
-
                         $('.zts_e_loc_select2').select2({
 
                             maximumSelectionLength: 1,
@@ -551,82 +562,32 @@ function zts_listing_tab_content()
                             theme: "classic"
 
                         });
-
                     }
-
-
-
-
-
-
-
-
-
-
-
                     let fileSelectHandler = function(e) {
-
                         // Prevent browser default event and stop propagation
-
                         prevent(e);
-
-
-
                         // Get the jQuery element instance
-
                         let $container = $(this);
-
-
-
                         // Change the container style
-
                         $container.removeClass('drag-over');
-
-
-
                         // Get the files
-
                         let files = e.target.files || e.originalEvent.dataTransfer.files;
-
-
-
                         // Check if the number of files exceeds the maximum limit
-
                         if (files.length > 10) {
-
                             alert('Maximum image upload limit exceeded.');
-
                             return;
-
                         }
-
-
-
                         // Makes the upload
 
                         setPreview($container, files);
-
                     };
                 </script>
-
         <?php
-
-
-
-
-
-
-
             }
         }
     }
 }
 add_action('woocommerce_account_zts-tab_endpoint', 'zts_listing_tab_content');
-
-
-
-
-
 function zts_faq_content()
 {
     if (is_user_logged_in()) {
@@ -644,20 +605,31 @@ function zts_faq_content()
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
         </script>
+
+        <script>
+            jQuery(document).ready(function($) {
+                tinymce.init({
+                    selector: '.custom-editor', // Use a class to target the textarea
+                    plugins: 'autolink link lists',
+                    toolbar: 'undo redo | styleselect | bold italic | link | numlist bullist',
+                });
+            });
+        </script>
         <h3 class="listing-my-account-title">Edit FAQ</h3>
         <form method="POST">
             <div class="row edit-listing-form">
                 <div class="col-md-12 mt-4">
                     <div>
                         <label class="active">Why did you become a family photographer?<span>*</span></label>
-                        <input type="text" name="become_fp" value="<?php echo !empty($become_fp) ? $become_fp : ''; ?>">
+                        <textarea class="custom-editor" name="become_fp"  ><?php echo !empty($become_fp) ? $become_fp : ''; ?></textarea>
                     </div>
                 </div>
 
                 <div class="col-md-12 mt-4">
                     <div>
                         <label class="active">What do you like most about being a family photographer?<span>*</span></label>
-                        <input type="text" name="being_fp" value="<?php echo !empty($being_fp) ? $being_fp : ''; ?>">
+
+                        <textarea class="custom-editor" name="being_fp"  ><?php echo !empty($being_fp) ? $being_fp : ''; ?></textarea>
                     </div>
                 </div>
 
@@ -665,7 +637,7 @@ function zts_faq_content()
                     <div>
                         <label class="active">Do you specialize in a certain style of photograhy?
                             <span>*</span></label>
-                        <input type="text" name="style_of_fp" value="<?php echo !empty($style_of_fp) ? $style_of_fp : ''; ?>">
+                        <textarea class="custom-editor" name="style_of_fp" ><?php echo !empty($style_of_fp) ? $style_of_fp : ''; ?></textarea>
                     </div>
                 </div>
                 <div class="col-md-12 mt-5 edit-listing-update-btn text-end">
@@ -677,7 +649,6 @@ function zts_faq_content()
     }
 }
 add_action('woocommerce_account_zts-faq_endpoint', 'zts_faq_content');
-
 // Register a new rewrite endpoint for the tab.
 function add_custom_tab_endpoint()
 {
@@ -685,8 +656,6 @@ function add_custom_tab_endpoint()
     add_rewrite_endpoint('zts-faq', EP_PAGES);
 }
 add_action('init', 'add_custom_tab_endpoint');
-
-
 // Flush rewrite rules when activating the plugin or theme.
 function flush_rewrite_rules_on_activation()
 {
@@ -694,8 +663,6 @@ function flush_rewrite_rules_on_activation()
     flush_rewrite_rules();
 }
 register_activation_hook(__FILE__, 'flush_rewrite_rules_on_activation');
-
-
 // Fix 404 error on custom tab.
 function custom_tab_query_vars($vars)
 {
@@ -703,5 +670,4 @@ function custom_tab_query_vars($vars)
     $vars[] = 'zts-faq';
     return $vars;
 }
-
 add_filter('woocommerce_get_query_vars', 'custom_tab_query_vars', 10, 1);

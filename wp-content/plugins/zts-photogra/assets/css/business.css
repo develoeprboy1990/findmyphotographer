@@ -1664,11 +1664,6 @@ background-color: #18655a !important;
 
 
 }
-
-
-
-
-
 .price-table__ribbon-inner {
 	text-align: center;
 	left: 0;
@@ -1676,146 +1671,36 @@ background-color: #18655a !important;
 margin-top: 28px;
 transform: translateY(-40%) translateX(-47%) translateX(28px) rotate(-45deg);
 color: #ffffff;
-
 	margin-top: 35px;
-
-
 	font-size: 13px;
-
-
 	line-height: 2;
-
-
 	font-weight: 500;
-
-
 	text-transform: uppercase;
-
-
 	background:#0b1632;
-
-
 }
-
-
-
-
-
-
-
-
 .choose-us-main-section .pricing-card .price-table__currency {
-
-
 	color: #1d2225;
-
-
 	align-self: flex-start;
-
-
 	margin-right: 3px;
-
-
 	line-height: 1;
-
-
 	font-size: 18px;
-
-
 	font-weight: 600;
-
-
 }
-
-
-
-
-
  .zts_step_bar {
-
-
-
-
-
       display: flex;
-
-
-
-
-
-      justify-content: center;
-
-
-
-
-
+	  justify-content: center;
       align-items: center;
 
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
     .zts_step {
-
-
-
-
-
       padding: 10px;
-
-
-
-
-
       margin: 10px;
-
-
-
-
-
       font-weight: bold;
-
-
-
-
-
-      background-color: #eee;
-
-
-
-
-
+	  background-color: #eee;
       border-radius: 20px;
-
-
-
-
-
       text-align: center;
-
-
-
-
-
-      min-width: 80px;
-
-
-
-
-
-    }
+	  min-width: 80px;
+	 }
 
 
 
