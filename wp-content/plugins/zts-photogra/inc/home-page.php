@@ -658,7 +658,7 @@ function my_cat_block_callback(){
         <?php
         foreach ($categories as $category) {
             // Get the category image URL
-            $image_id = get_woocommerce_term_meta($category->term_id, 'thumbnail_id', true);
+            $image_id = get_term_meta($category->term_id, 'thumbnail_id', true);
             $image_url = wp_get_attachment_image_url($image_id, 'full');
             ?>
               <div class="col-5">
