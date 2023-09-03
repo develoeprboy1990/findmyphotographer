@@ -621,7 +621,7 @@ function zts_faq_content()
                 <div class="col-md-12 mt-4">
                     <div>
                         <label class="active">Why did you become a family photographer?<span>*</span></label>
-                        <textarea class="custom-editor" name="become_fp"  ><?php echo !empty($become_fp) ? $become_fp : ''; ?></textarea>
+                        <textarea class="custom-editor" name="become_fp" rows="23"  ><?php echo !empty($become_fp) ? $become_fp : ''; ?></textarea>
                     </div>
                 </div>
 
@@ -629,7 +629,7 @@ function zts_faq_content()
                     <div>
                         <label class="active">What do you like most about being a family photographer?<span>*</span></label>
 
-                        <textarea class="custom-editor" name="being_fp"  ><?php echo !empty($being_fp) ? $being_fp : ''; ?></textarea>
+                        <textarea class="custom-editor" name="being_fp" rows="20"  ><?php echo !empty($being_fp) ? $being_fp : ''; ?></textarea>
                     </div>
                 </div>
 
@@ -637,7 +637,7 @@ function zts_faq_content()
                     <div>
                         <label class="active">Do you specialize in a certain style of photograhy?
                             <span>*</span></label>
-                        <textarea class="custom-editor" name="style_of_fp" ><?php echo !empty($style_of_fp) ? $style_of_fp : ''; ?></textarea>
+                        <textarea class="custom-editor" name="style_of_fp" rows="20" ><?php echo !empty($style_of_fp) ? $style_of_fp : ''; ?></textarea>
                     </div>
                 </div>
                 <div class="col-md-12 mt-5 edit-listing-update-btn text-end">

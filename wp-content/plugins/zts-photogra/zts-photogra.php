@@ -190,12 +190,12 @@ function register_user_after_order($order_id)
         return;
     }
     if (isset($_COOKIE['zts_form_data']) && !empty($_COOKIE['zts_form_data'])) {
-        $cookies_data = $_COOKIE['zts_form_data'];
+        $cookies_data   = $_COOKIE['zts_form_data'];
         $remove_slashes = stripslashes($cookies_data);
         $get_form_array = json_decode($remove_slashes);
-
         global $wpdb;
         $table_name = $wpdb->prefix . 'zts_user_data';
+
         if ($get_form_array->product_scope == 'free') {
             $data = array(
                 'customer_plan'    => $get_form_array->product_id,
@@ -205,21 +205,21 @@ function register_user_after_order($order_id)
                 'categories'       => serialize($get_form_array->categories),
                 'locations'        => serialize($get_form_array->location_id),
                 'priority'         => '3',
+                'listing_url'      => get_site_url() . '/profile-page/?user=' . $get_form_array->company_name
             );
         } else {
-
-
             $data = array(
                 'customer_plan'    => $get_form_array->product_id,
                 'company_name'     => $get_form_array->company_name,
                 'order_id'         => $order_id,
-                'phone_number'    => $get_form_array->company_phone,
+                'phone_number'     => $get_form_array->company_phone,
                 'company_url'      => $get_form_array->company_url,
                 'profile_image'    => $get_form_array->profile_img,
                 'gallery_images'   => serialize($get_form_array->gallery),
                 'categories'       => serialize($get_form_array->categories),
                 'locations'        => serialize($get_form_array->location_id),
                 'priority'         => '2',
+                'listing_url'      => get_site_url() . '/profile-page/?user=' . $get_form_array->company_name
             );
         }
         // Check if the user's data already exists
@@ -230,10 +230,9 @@ function register_user_after_order($order_id)
         } else {
             // Insert a new record
             $data['user_id'] = $user_id;
-            if (get_current_user_id()) {//mutahir
+            if (get_current_user_id()) { //mutahir
                 $wpdb->update($table_name, array('status' => 'upgraded'), array('user_id' => $user_id));
             }
-
             $wpdb->insert($table_name, $data);
         }
     }
@@ -315,7 +314,7 @@ function zts_custom_login_redirect($redirect, $user)
 add_filter('woocommerce_login_redirect', 'zts_custom_login_redirect', 10, 2);
 function zts_custom_refund_hook($order_id)
 {
-    // Update the custom table
+    // Update the custom tableget_site_url()
     global $wpdb;
     $table_name = $wpdb->prefix . 'zts_user_data';
 

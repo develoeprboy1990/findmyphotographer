@@ -18,7 +18,7 @@ function zts_add_profile_callback($atts)
         if ($row) {
             // Access the retrieved data
             $company_name = $row['company_name'];
-            $company_url = $row['company_url']; 
+            $company_url = $row['company_url'];
             if (!preg_match("~^(?:f|ht)tps?://~i", $company_url)) {
                 $company_url = "http://" . $company_url;
             }
@@ -248,55 +248,47 @@ function zts_add_profile_gallery_callback($atts)
                         }
                     );
                 });
-        </script><?php
-                }
-                $content = ob_get_clean();
-                return $content;
-            }
-            add_shortcode('ZTS_FAQ', 'zts_faq_callback');
-            function zts_faq_callback()
-            {
-                ob_start();
-                $g_company_url = isset($_GET['user']) ? $_GET['user'] : '';
-                if (!empty($g_company_url)) {
-                    global $wpdb;
-                    $table_name = $wpdb->prefix . 'zts_user_data';
-                    $sql = $wpdb->prepare("SELECT * FROM $table_name WHERE company_name = %s", $g_company_url);
-                    $row = $wpdb->get_row($sql, ARRAY_A);
-                    if ($row) {
-                        // Access the retrieved data
-                        $user_id = $row['user_id'];
-                    }
-                    $being_fp = get_user_meta($user_id, 'being_fp', true);
-                    $style_of_fp = get_user_meta($user_id, 'style_of_fp', true);
-                    $become_fp = get_user_meta($user_id, 'become_fp', true);
+        </script> 
+    <?php
+    }
+    $content = ob_get_clean();
+    return $content;
+}
+add_shortcode('ZTS_FAQ', 'zts_faq_callback');
+function zts_faq_callback()
+{
+    ob_start();
+    $g_company_url = isset($_GET['user']) ? $_GET['user'] : '';
+    if (!empty($g_company_url)) {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'zts_user_data';
+        $sql = $wpdb->prepare("SELECT * FROM $table_name WHERE company_name = %s", $g_company_url);
+        $row = $wpdb->get_row($sql, ARRAY_A);
+        if ($row) {
+            // Access the retrieved data
+            $user_id = $row['user_id'];
+        }
+        $being_fp = get_user_meta($user_id, 'being_fp', true);
+        $style_of_fp = get_user_meta($user_id, 'style_of_fp', true);
+        $become_fp = get_user_meta($user_id, 'become_fp', true);
 
-                    ?>
+    ?>
         <div class="faqs-section">
             <div class="accordion">
 
                 <?php
-                    if (!empty($become_fp)) {
-
-                ?>
-
+                if (!empty($become_fp)) {?>
                     <div class="accordion-item">
-
                         <button id="accordion-button-3" aria-expanded="false"><span class="accordion-title">Why did you become a family photographer?</span><i class="icon"></i></button>
-
-                        <div class="accordion-content">
-
+                        <div class="accordion-content" style="padding-left:10px;padding-right:10px">
                             <p><?php echo $become_fp; ?></p>
-
                         </div>
-
                     </div>
-
                 <?php
 
-                    }
+                }
 
-                    if (!empty($being_fp)) {
+                if (!empty($being_fp)) {
 
                 ?>
 
@@ -305,7 +297,7 @@ function zts_add_profile_gallery_callback($atts)
 
                         <button id="accordion-button-1" aria-expanded="false"><span class="accordion-title">What do you like most about being a family photographer?</span><i class="icon"></i></button>
 
-                        <div class="accordion-content">
+                        <div class="accordion-content" style="padding-left:10px;padding-right:10px">
 
                             <p><?php echo $being_fp; ?></p>
 
@@ -315,9 +307,9 @@ function zts_add_profile_gallery_callback($atts)
 
                 <?php
 
-                    }
+                }
 
-                    if (!empty($style_of_fp)) {
+                if (!empty($style_of_fp)) {
 
                 ?>
 
@@ -325,7 +317,7 @@ function zts_add_profile_gallery_callback($atts)
 
                         <button id="accordion-button-2" aria-expanded="false"><span class="accordion-title">Do you specialize in a certain style of photograhy?</span><i class="icon"></i></button>
 
-                        <div class="accordion-content">
+                        <div class="accordion-content" style="padding-left:10px;padding-right:10px">
 
                             <p><?php echo $style_of_fp; ?></p>
 
@@ -335,7 +327,7 @@ function zts_add_profile_gallery_callback($atts)
 
                 <?php
 
-                    }
+                }
 
                 ?>
 
@@ -381,7 +373,7 @@ function zts_add_profile_gallery_callback($atts)
 
 <?php
 
-                }
+    }
 
 
 
@@ -393,10 +385,10 @@ function zts_add_profile_gallery_callback($atts)
 
 
 
-                $content = ob_get_clean();
+    $content = ob_get_clean();
 
-                return $content;
-            }
+    return $content;
+}
 
 
 

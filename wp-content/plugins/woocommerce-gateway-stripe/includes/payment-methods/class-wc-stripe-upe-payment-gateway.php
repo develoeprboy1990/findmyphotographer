@@ -1286,15 +1286,25 @@ class WC_Stripe_UPE_Payment_Gateway extends WC_Gateway_Stripe {
 		$payment_type = $this->is_payment_recurring( $order->get_id() ) ? 'recurring' : 'single';
 		$name         = sanitize_text_field( $order->get_billing_first_name() ) . ' ' . sanitize_text_field( $order->get_billing_last_name() );
 		$email        = sanitize_email( $order->get_billing_email() );
-
+ 
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'zts_user_data';
+		$sql        = $wpdb->prepare("SELECT * FROM $table_name WHERE order_id = %s", $order->get_id());
+		$row        = $wpdb->get_row($sql, ARRAY_A);
+		$company_name = null;
+		if (!empty($row)) {
+			// Access the retrieved data shahge modified code
+			$company_name = '/profile-page/?user=' .$row['company_name'];
+		}
 		return [
 			'customer_name'  => $name,
 			'customer_email' => $email,
-			'site_url'       => esc_url( get_site_url() ),
+			'site_url'       => esc_url(get_site_url() .$company_name),
 			'order_id'       => $order->get_id(),
 			'order_key'      => $order->get_order_key(),
 			'payment_type'   => $payment_type,
 		];
+		
 	}
 
 	/**

@@ -438,11 +438,7 @@ function zts_listing_page()
 
 
 
-
-
-
-
-        if (!$otherDisplayed) {
+       if (!$otherDisplayed) {
          // Display the "Other in 2022" section
         ?>
           <div class="text-center">
@@ -453,11 +449,10 @@ function zts_listing_page()
         <?php
           $otherDisplayed = true; // Update the flag to indicate the section has been displayed
         }
-$company_url = $value['company_url'];
+        $company_url = $value['company_url'];
         if (!preg_match("~^(?:f|ht)tps?://~i", $company_url)) {
           $company_url = "http://" . $company_url;
-      }
-        ?>
+         }?>
         <ul class="zts_free_listing">
           <li>
             <div class="media">
@@ -470,8 +465,7 @@ $company_url = $value['company_url'];
               </div>
               <div class="media-right align-self-center">
                <a target="_blank" href="<?php echo $company_url;?>" class="btn btn-default" >
-                  <i aria-hidden="true" class="fas fa-globe"></i>
-                  View Website</a>
+                  <i aria-hidden="true" class="fas fa-globe"></i>View Website</a>
                 </div>
             </div>
           </li>
