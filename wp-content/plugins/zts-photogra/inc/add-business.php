@@ -25,21 +25,42 @@ function zts_add_business_callback($atts)
     'hide_empty'   => false,
     'hierarchical' => true,
     'parent'       => 0, // Only retrieve parent terms
+    'orderby' => 'name',
+    'order' => 'ASC',
   ));
   $taxonomy_array = array();
   foreach ($parent_terms as $key => $value) {
     $child_term_id = $value->term_id;
-    $child_terms = get_term_children($child_term_id, $taxonomy);
+    //$child_terms = get_term_children($child_term_id, $taxonomy);
+    $child_terms = get_terms(array(
+      'taxonomy'     => $taxonomy,
+      'hide_empty'   => false,
+      'hierarchical' => true,   
+      'parent'       => $child_term_id, 
+      'orderby' => 'name',
+      'order' => 'ASC',
+        ));
+
     // Create an array to store the child terms of the current parent term
     $child_term_array = array();
-    foreach ($child_terms as $child_term) {
+    /*foreach ($child_terms as $child_term) {
       $child_term_obj = get_term($child_term, $taxonomy);
       $child_term_array[] = array(
         'id'   => $child_term_obj->term_id,
         'name' => $child_term_obj->name,
         // Add any other desired properties of the child term
       );
+    }*/
+
+    foreach ($child_terms as $key => $child_term) {
+      //echo $child_term->term_id.'<bR>';
+        $child_term_array[] = array(
+            'id'   => $child_term->term_id,
+            'name' => $child_term->name,
+            // Add any other desired properties of the child term
+        );
     }
+
     // Store the parent term and its child terms in the taxonomy array
     $taxonomy_array[] = array(
       'parent' => array(
@@ -54,6 +75,8 @@ function zts_add_business_callback($atts)
   $categories = get_terms(array(
     'taxonomy' => 'product_cat',
     'hide_empty' => false,
+    'orderby' => 'name',
+    'order' => 'ASC',
     'exclude' => array(get_option('default_product_cat')),
   ));
   // FOR PROVINCE.
