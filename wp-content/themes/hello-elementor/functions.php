@@ -228,50 +228,7 @@ if (!function_exists('hello_elementor_body_open')) {
  * Veio.ro
  */
 
-
-function photographers_veio()
-{
-
-	register_post_type(
-		'free-listings',
-		array(
-			'labels' => array('name' => __('Free Listings'), 'singular_name' => __('Free Listing')),
-			'public' => true,
-			'menu_icon'           => 'dashicons-camera',
-			'has_archive' => true,
-			'menu_position' => 4,
-			'taxonomies'          => array('category'),
-			'supports' => array('title', 'editor', 'thumbnail')
-		)
-	);
-
-	register_post_type(
-		'premium_listings',
-		array(
-			'labels' => array('name' => __('Premium Listings'), 'singular_name' => __('Premium Listing')),
-			'public' => true,
-			'menu_icon'           => 'dashicons-camera',
-			'menu_position' => 4,
-			'has_archive' => true,
-			'taxonomies'          => array('category'),
-			'supports' => array('title', 'editor', 'thumbnail',)
-		)
-	);
-}
-// add_action( 'init', 'photographers_veio' );
-
-
-
-
-?>
-
-<?php
-
-
-
-
-
-
+ 
 
 add_shortcode('veio_add_business', 'veio_add_business');
 function veio_add_business()
@@ -734,42 +691,48 @@ function add_site_url_to_charge_metadata($order_id)
 		$stripe_charge->metadata['site_url'] = $site_url . $company_name;
 		$stripe_charge->save();
 	}
+}
 
+// Hook into the WooCommerce payment complete event
+add_action('woocommerce_payment_complete', 'update_stripe_charge_metadata');
 
-	// Hook into the WooCommerce payment complete event
-	add_action('woocommerce_payment_complete', 'update_stripe_charge_metadata');
+function update_stripe_charge_metadata($order_id)
+{
+	$order = wc_get_order($order_id);
+	$charge_id = get_post_meta($order_id, '_transaction_id', true);
 
-	function update_stripe_charge_metadata($order_id)
-	{
-		$order = wc_get_order($order_id);
-		$charge_id = get_post_meta($order_id, '_transaction_id', true);
+	// Make sure charge ID and order are valid
+	if ($charge_id && $order) {
+		// Retrieve Stripe charge using the Stripe API
+		\Stripe\Stripe::setApiKey('sk_test_51Kgl9zFbVyliLyasVj5GLC27AxGG161jJzpQ5ev9c3cmeZCUIwFVGqDWW70brtSsuZyt5rZdG82ef17l06MgiDEm00Ey2z91P0');
+		// Fetch charge data from Stripe
 
-		// Make sure charge ID and order are valid
-		if ($charge_id && $order) {
+		try {
 			// Retrieve Stripe charge using the Stripe API
-			\Stripe\Stripe::setApiKey('sk_test_51Kgl9zFbVyliLyasVj5GLC27AxGG161jJzpQ5ev9c3cmeZCUIwFVGqDWW70brtSsuZyt5rZdG82ef17l06MgiDEm00Ey2z91P0');
-			// Fetch charge data from Stripe
-
-			try {
-				// Retrieve Stripe charge using the Stripe API
-				$stripe_charge = \Stripe\Charge::retrieve($charge_id);
-				// Add site URL to metadata
-				$site_url = get_site_url(); // Get the site URL
-				global $wpdb;
-				$table_name = $wpdb->prefix . 'zts_user_data';
-				$sql        = $wpdb->prepare("SELECT * FROM $table_name WHERE order_id = %s", $order->get_id());
-				$row        = $wpdb->get_row($sql, ARRAY_A);
-				$company_name = null;
-				if (!empty($row)) {
-					// Access the retrieved data shahge modified code
-					$company_name = '/profile-page/?user=' . $row['company_name'];
-				}
-				$stripe_charge->metadata['site_url'] = $site_url . $company_name;
-				$stripe_charge->save();
-			} catch (\Stripe\Exception\ApiErrorException $e) {
-				// Handle API errors
-				error_log('Stripe API Error: ' . $e->getMessage());
+			$stripe_charge = \Stripe\Charge::retrieve($charge_id);
+			// Add site URL to metadata
+			$site_url = get_site_url(); // Get the site URL
+			global $wpdb;
+			$table_name = $wpdb->prefix . 'zts_user_data';
+			$sql        = $wpdb->prepare("SELECT * FROM $table_name WHERE order_id = %s", $order->get_id());
+			$row        = $wpdb->get_row($sql, ARRAY_A);
+			$company_name = null;
+			if (!empty($row)) {
+				// Access the retrieved data shahge modified code
+				$company_name = '/profile-page/?user=' . $row['company_name'];
 			}
+			$stripe_charge->metadata['site_url'] = $site_url . $company_name;
+			$stripe_charge->save();
+		} catch (\Stripe\Exception\ApiErrorException $e) {
+			// Handle API errors
+			error_log('Stripe API Error: ' . $e->getMessage());
 		}
 	}
 }
+
+global $wpdb;
+$table_name = $wpdb->prefix . 'zts_user_data';
+// Check if the user record exists
+$user_exists = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $table_name WHERE id = %s ", '5'));
+echo '<pre>';
+print_r($user_exists);exit;
