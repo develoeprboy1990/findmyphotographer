@@ -1,397 +1,111 @@
 <?php
-
-
-
-
-
-
-
 /**
-
  * shortcode form for search bar.
-
  *
 
  * @since    1.0
-
  */
 
-
-
-
-
-
-
-function my_custom_shortcode_callback($atts)
-
-{
-
-
-
-
-
+function my_custom_shortcode_callback($atts){
     // Get the custom taxonomy terms
-
     $taxonomy = 'location';
-
     $parent_terms = get_terms(array(
-
       'taxonomy'     => $taxonomy,
-
       'hide_empty'   => false,
-
       'hierarchical' => true,
-
       'parent'       => 0, // Only retrieve parent terms
-
+      'orderby' => 'name',
+      'order' => 'ASC',
     ));
 
     $taxonomy_array = array();
-
+    
     foreach ($parent_terms as $key => $value) {
-
       $child_term_id = $value->term_id;
+      //$child_terms = get_term_children($child_term_id, $taxonomy);
 
-      $child_terms = get_term_children($child_term_id, $taxonomy);
-
-
+      $child_terms = get_terms(array(
+      'taxonomy'     => $taxonomy,
+      'hide_empty'   => false,
+      'hierarchical' => true,   
+      'parent'       => $child_term_id, 
+      'orderby' => 'name',
+      'order' => 'ASC',
+        ));
+      //print_r($child_terms);
 
       // Create an array to store the child terms of the current parent term
-
       $child_term_array = array();
-
-      foreach ($child_terms as $child_term) {
-
+      /*foreach ($child_terms as $child_term) {
           $child_term_obj = get_term($child_term, $taxonomy);
-
           $child_term_array[] = array(
-
               'id'   => $child_term_obj->term_id,
-
               'name' => $child_term_obj->name,
-
               // Add any other desired properties of the child term
-
           );
-
+      }*/
+     // echo '<pre>';
+      foreach ($child_terms as $key => $child_term) {
+        //echo $child_term->term_id.'<bR>';
+          $child_term_array[] = array(
+              'id'   => $child_term->term_id,
+              'name' => $child_term->name,
+              // Add any other desired properties of the child term
+          );
       }
-
-
-
+      //print_r($child_term_array).'<Br><Br>';
+     
       // Store the parent term and its child terms in the taxonomy array
-
       $taxonomy_array[] = array(
-
           'parent' => array(
-
               'id'   => $value->term_id,
-
               'name' => $value->name,
-
               // Add any other desired properties of the parent term
-
           ),
-
           'children' => $child_term_array,
-
       );
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+     //print_r($taxonomy_array).'<Br><Br>';
 
     // get categories.
-
-
-
-
-
-
-
     $categories = get_terms(array(
-
-
-
-
-
-
-
         'taxonomy' => 'product_cat',
-
-
-
-
-
-
-
         'hide_empty' => false,
-
-
-
-
-
-
-
+        'orderby' => 'name',
+        'order' => 'ASC',
         'exclude' => array(get_option('default_product_cat')),
-
-
-
-
-
-
-
     ));
 
     $zts_site_url = get_site_url();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
 
-
-
-
-
-
-
     <div class="search-button">
-
-
-
-
-
-
-
         <div class="row">
-
-
-
-
-
-
-
             <div class="col-md-12 col-lg-12 col-xs-12">
-
-
-
-
-
-
-
                 <div class="search-bar">
-
-
-
-
-
-
-
                     <div class="search-inner">
-
-
-
-
-
-
-
                         <form class="search-form" action="<?php echo get_site_url() . '/search-page'; ?>" method="GET" >
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                             <div class="form-group inputwithicon">
-
-
-
-
-
-
-
                                 <img src="<?php echo $zts_site_url; ?>/wp-content/uploads/2023/06/boxes.png" />
-
-
-
-
-
-
-
                                 <div class="select">
-
-
-
-
-
-
-
                                     <select name="category" id="ct"  class="form-control-lg form-control">
-
-
-
-
-
-
-
-
-
                                         <?php
-
-
-
-
-
-
-
-                                        if (!empty($categories) && !is_wp_error($categories)) {
-
-
-
-              
-
+                                        if (!empty($categories) && !is_wp_error($categories)) {             
                                             echo '<option value="">Select category</option>';
-
                                             foreach ($categories as $category) {
-
-
-
-
-
-
-
                                                 // Access category properties
-
-
-
-
-
-
-
                                                 echo '<option value="' . $category->slug . '">' . $category->name . '</option>';
-
                                             }
-
                                         }
-
-
-
-
-
-
-
                                         ?>
-
-
-
-
-
-
-
                                     </select>
-
-
-
-
-
-
-
                                 </div>
-
-
-
-
-
-
-
                             </div>
 
-
-
-
-
-
-
                             <div class="form-group inputwithicon">
-
-
-
-
-
-
-
                                 <img src="<?php echo $zts_site_url; ?>/wp-content/uploads/2023/06/gps_location.png" />
-
-
-
-
-
-
-
                                 <div class="select">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                                     <?php
-
-
-
-
-
-
-
                                     if (!empty($taxonomy_array) && !is_wp_error($taxonomy_array)) {
                                         echo '<select name="location" id="loc"  class="form-control-lg form-control">';
                                         echo '<option value="">Select location</option>';
@@ -403,133 +117,22 @@ function my_custom_shortcode_callback($atts)
                                             }
                                             echo "</optgroup>";
                                         }
-
-
-
-
-
-
-
-
-
                                         echo '</select>';
 
                                     }
-
-
-
-
-
-
-
                                     ?>
-
-
-
-
-
-
-
                                 </div>
-
-
-
-
-
-
-
                             </div>
-
-
-
-
-
-
-
                             <button class="button btn btn-common"><i class="fa fa-search"></i> Search</button>
-
-
-
-
-
-
-
                         </form>
-
-
-
-
-
-
-
                     </div>
-
-
-
-
-
-
-
                 </div>
-
-
-
-
-
-
-
             </div>
-
-
-
-
-
-
-
         </div>
-
-
-
-
-
-
-
     </div>
-
-
-
-
-
-
-
-
-
 <?php
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
-
-
-
-
-
-
-
 add_shortcode('ZTS_SEARCH', 'my_custom_shortcode_callback');
-
 
 add_shortcode('ZTS_CAT_BLOCK', 'my_cat_block_callback');
 function my_cat_block_callback(){
@@ -539,9 +142,7 @@ function my_cat_block_callback(){
     'hide_empty' => false,
     'exclude' => array(get_option('default_product_cat')),
     ));
-    ?>
-
-   
+    ?>   
  <style type="text/css">
         .latest-categories .col-5 {
             flex: 0 0 auto;
@@ -850,8 +451,6 @@ vertical-align: middle
     return $content;
 }
 
-
-
 add_shortcode('HOME_FIND_PHOGOGRA_BTN', 'zts_home_find_photogra');
 function zts_home_find_photogra(){
     ob_start();
@@ -876,7 +475,3 @@ function zts_home_find_photogra(){
     $content = ob_get_clean();
     return $content;
 }
-
-
-
-
