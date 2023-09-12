@@ -730,9 +730,7 @@ function update_stripe_charge_metadata($order_id)
 	}
 }
 
-global $wpdb;
-$table_name = $wpdb->prefix . 'zts_user_data';
-// Check if the user record exists
-$user_exists = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $table_name WHERE id = %s ", '5'));
-echo '<pre>';
-print_r($user_exists);exit;
+   $term = get_term_by('id', 52, 'location');
+echo '<pre>=============';
+   var_dump($term);
+   echo '=============';

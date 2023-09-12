@@ -234,13 +234,119 @@ function register_user_after_order($order_id)
                 $wpdb->update($table_name, array('status' => 'upgraded'), array('user_id' => $user_id));
             }
             $wpdb->insert($table_name, $data);
+
+
+            $zts_user_data_id =  $wpdb->insert_id;
+            external_hook($zts_user_data_id);
+
         }
     }
 }
+
+function external_hook($zts_user_data_id)
+{
+    global $wpdb;
+    $combineArray = [];
+    $table_name = $wpdb->prefix . 'zts_user_data'; // Get user meta data based on the user ID and meta key.
+
+    // Check if the user record exists
+    $user_exists = $wpdb->prepare("SELECT * FROM $table_name WHERE id = " . $zts_user_data_id . " AND status='active' AND expiry='0' ");
+    $row = $wpdb->get_row($user_exists, ARRAY_A);
+    $user_id = $row['user_id'];
+
+    $user_data                    = get_userdata($user_id);
+    // Replace $user_id with the actual user ID for which you want to retrieve meta data. 
+
+    // Replace $meta_key with the specific meta key you want to retrieve.
+    $meta_key = 'first_name';
+    $last_name = 'last_name';
+    $name      = '';
+    $user_meta = get_user_meta($user_id, $meta_key, true);
+
+    if ($user_meta) {
+        $name = $user_meta;
+    }
+    $user_meta = get_user_meta($user_id, $last_name, true);
+
+    if ($user_meta) {
+
+        $name .= ' ' . $user_meta;
+    }
+    $combineArray['username']  = $name;
+    $combineArray['useremail'] = $user_data->data->user_email;
+    // Replace $post_id with the actual post ID you want to retrieve.
+    $post_id = $row['customer_plan'];
+
+    // Get post data based on the post ID.
+    $post = get_post($post_id);
+    // Check if the post was retrieved successfully.
+    if ($post) {
+        // Access post information.
+        $post_title = $post->post_title;
+        $post_content = $post->post_content;
+        $post_date = $post->post_date;
+        $combineArray['customer_plan_id']   = $post_id;
+        $combineArray['customer_plan_name'] = $post_content;
+    } else {
+        echo "Post not found or invalid post ID.";
+    }
+
+    $combineArray['company_name'] = $row['company_name'];
+    $combineArray['phone_number'] = $row['phone_number'];
+
+    if (!empty($row['locations'])) {
+        $term_ids = unserialize($row['locations']);
+        $taxonomy = 'location';
+        foreach ($term_ids as $value) {
+            $term = get_term_by('id', $value, $taxonomy, ARRAY_A);
+            if (!empty($term['name'])) {
+                $location_names[] = $term['name'];
+                $location_ids[]   = $value;
+            }
+        }
+    }
+
+     if (!empty($row['categories'])) {
+        $category_ids = unserialize($row['categories']);
+        foreach ($category_ids as $id) {
+            $term = get_term_by('id', $id, 'product_cat', ARRAY_A);
+            if (!empty($term['name'])) {
+                $categories_names[] = $term['name'];
+                $categories_ids[]   = $id;
+            }
+        }
+    }
+
+    $combineArray['categories_ids'] = implode(',', $categories_ids);
+    $combineArray['categories_names']     = implode(',', $categories_names);
+    $combineArray['locations_ids']  = implode(',', $location_ids);
+    $combineArray['location_names']      = implode(',', $location_names);
+
+    $target_url = 'https://hook.boostspace.integromat.celonis.com/6kog766pjluk9602nbqskhhkkiaj6asc';
+    $curl       = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $target_url);
+    curl_setopt($curl, CURLOPT_POST, 1);
+    curl_setopt($curl, CURLOPT_POST, count($combineArray));
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $combineArray);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_VERBOSE, true);
+    $result = curl_exec($curl);
+    if (!$result) {
+        die('Error: "' . curl_error($curl) . '" - Code: ' . curl_errno($curl));
+    }
+    curl_close($curl);
+}
+
 add_action('woocommerce_thankyou', 'register_user_after_order', 10, 1);
 add_filter('woocommerce_thankyou_order_received_text', 'zts_change_data_on_thankou_page', 10, 2);
+
+
+ 
+
+
 function zts_change_data_on_thankou_page($thankyou_message, $order)
 {
+    external_hook('38');
     $thankyou_message = 'Your Plan Has Been Successfully Purchased';
     return $thankyou_message;
 }

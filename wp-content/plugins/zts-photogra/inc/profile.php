@@ -228,8 +228,8 @@ function zts_add_profile_gallery_callback($atts)
         <script type="text/javascript">
             jQuery("#animated-thumbnails-gallery")
                 .justifiedGallery({
-                    captions: false,
-                    lastRow: "hide",
+                    captions: false, 
+                   // lastRow: "hide",
                     rowHeight: 180,
                     margins: 5
                 }).on("jg.complete", function() {
